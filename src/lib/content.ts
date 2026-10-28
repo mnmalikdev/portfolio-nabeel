@@ -79,7 +79,7 @@ export const fmtDate = (d: string, opts: Intl.DateTimeFormatOptions = { day: '2-
 
 export const site = {
   name: 'Nabeel Malik',
-  url: 'https://mnmalikdev-portfolio.vercel.app',
+  url: 'https://portfolio-nabeel-malik.vercel.app',
   email: 'mnmalikdev@gmail.com',
   github: 'https://github.com/mnmalikdev',
   linkedin: 'https://linkedin.com/in/nabeelmalik97',
