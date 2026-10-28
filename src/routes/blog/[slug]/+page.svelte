@@ -1,7 +1,8 @@
 <script lang="ts">
   import { href } from '$lib/link';
   import { onMount } from 'svelte';
-  import { fmtDate } from '$lib/content';
+  import Seo from '$lib/components/Seo.svelte';
+  import { fmtDate, site } from '$lib/content';
   import { chars, reveal } from '$lib/motion';
 
   let { data } = $props();
@@ -19,13 +20,7 @@
   });
 </script>
 
-<svelte:head>
-  <title>{p.title} — Nabeel Malik</title>
-  <meta name="description" content={p.excerpt} />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content={p.title} />
-  <meta property="og:description" content={p.excerpt} />
-</svelte:head>
+<Seo title={`${p.title} — Nabeel Malik`} description={p.excerpt} path={`/blog/${p.slug}/`} type="article" published={p.date} jsonld={[{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.excerpt, datePublished: p.date, keywords: p.tags.join(', '), url: `${site.url}/blog/${p.slug}/`, author: { '@type': 'Person', name: site.name, url: site.url + '/' } }]} />
 
 <div class="progress" bind:this={bar}></div>
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { site } from '$lib/content';
+  import Seo from '$lib/components/Seo.svelte';
   import { href } from '$lib/link';
   import { gsap, setupGsap, reduced, chars, reveal, lines } from '$lib/motion';
   import ProjectArt from '$lib/components/ProjectArt.svelte';
@@ -16,12 +18,7 @@
   }
 </script>
 
-<svelte:head>
-  <title>{p.title} — Nabeel Malik</title>
-  <meta name="description" content={p.summary} />
-  <meta property="og:title" content={p.title} />
-  <meta property="og:description" content={p.summary} />
-</svelte:head>
+<Seo title={`${p.title} — Nabeel Malik`} description={p.summary} path={`/projects/${p.slug}/`} type="article" jsonld={[{ '@context': 'https://schema.org', '@type': 'CreativeWork', name: p.title, description: p.summary, dateCreated: p.year, keywords: p.stack.join(', '), url: `${site.url}/projects/${p.slug}/`, creator: { '@type': 'Person', name: site.name, url: site.url + '/' } }]} />
 
 {#key p.slug}
   <article>

@@ -1,7 +1,8 @@
 <script lang="ts">
   import { href } from '$lib/link';
   import { onMount } from 'svelte';
-  import { projects, posts, fmtDate, site } from '$lib/content';
+  import Seo from '$lib/components/Seo.svelte';
+  import { projects, posts, fmtDate, site, experience as xps } from '$lib/content';
   import { gsap, ScrollTrigger, setupGsap, reduced, whenIntroDone, splitChars, reveal, lines } from '$lib/motion';
   import Molten from '$lib/components/Molten.svelte';
   import Marquee from '$lib/components/Marquee.svelte';
@@ -11,43 +12,27 @@
   // Drop a photo at src/lib/assets/portrait.(jpg|png|webp) and it shows up in the hero. No file = no portrait.
   const portrait = Object.values(import.meta.glob<string>('/src/lib/assets/portrait.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' }))[0];
 
-  type Xp = { when: string; org: string; role: string; where: string; url?: string; groups?: { title?: string; url?: string; items: string[] }[] };
-  const xps: Xp[] = [
-    { when: 'Jan 2026 — Now', org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
-      { items: [
-        'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
-        'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
-        'Redesigned the production logbook into a cross-entity, real-time schema (NestJS, PostgreSQL, Drizzle, Kafka).',
-        'Multi-cavity experiment configuration in SvelteKit 5 for process engineers.'
-      ] }
-    ] },
-    { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', url: 'https://mlarteka.com/', role: 'Software engineer (staff augmentation) · now Mlarteka', where: 'Canada · Remote', groups: [
-      { title: 'MonieCorp — fintech product', items: [
-        'React + TypeScript + shadcn components: page loads 25% faster, UI bugs down 40% after the refactor.',
-        '15+ SOLID admin-panel components; client feedback loop cut from 3 days to 24 hours.',
-        'Multi-step form for tiered currency margins: setup from 20+ min to under 4 min per currency pair.',
-        'CSP Level 3 with nonce-based whitelisting — blocked 100% of inline-script attempts in pen testing.'
-      ] },
-      { title: 'Staples Canada', items: [
-        'Mixpanel tracking for 100k+ users (views, add-to-cart, checkout) — helped lift conversions 12%.',
-        'Built print-product customization end to end with the Canva API — engagement up 20%.',
-        'Fixed 30+ production bugs inside 4-hour SLAs, keeping 99.9% uptime through peak sales.'
-      ] }
-    ] },
-    { when: 'Apr 2022 — May 2024', org: 'Code Huddle', role: 'Associate software engineer · intern Apr–Jun 2022', where: 'Islamabad, PK', groups: [
-      { title: 'GYMYG — virtual gym partner (US startup)', url: 'https://gymyg.fit/', items: [
-        'NestJS REST APIs with JWT RBAC serving 10K DAU at under 200 ms P95.',
-        'Stripe monthly subscriptions, $15k+ processed.',
-        'Video load times down ~30% with FFmpeg compression and CloudFront edge delivery.',
-        'CI/CD with GitHub Actions and AWS CodePipeline — deploys 40% faster.'
-      ] },
-      { title: 'OrderMe — QR ordering MVP (Italian startup)', url: 'https://orderme.io/', items: [
-        'Firebase Auth + Firestore backend handling 100+ daily orders.',
-        'shadcn/ui + Tailwind admin panel for menus — owner setup time down 60%.'
-      ] }
-    ] },
-    { when: 'Feb 2018 — Feb 2022', org: 'COMSATS', role: 'Bachelor of Science in Software Engineering', where: 'Islamabad, PK' }
-  ];
+  const personLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': site.url + '/#person',
+    name: site.name,
+    alternateName: site.fullName,
+    jobTitle: site.jobTitle,
+    description: site.description,
+    url: site.url + '/',
+    image: site.url + site.ogImage,
+    email: 'mailto:' + site.email,
+    telephone: site.phone.replace(/\s/g, ''),
+    address: { '@type': 'PostalAddress', addressLocality: 'Bayreuth', addressCountry: 'DE' },
+    sameAs: [site.github, site.linkedin],
+    worksFor: { '@type': 'Organization', name: 'OSPHIM', url: 'https://www.osphim.com' },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'COMSATS University Islamabad' },
+    knowsAbout: site.knowsAbout,
+    hasOccupation: { '@type': 'Occupation', name: site.jobTitle, occupationLocation: { '@type': 'City', name: 'Bayreuth, Germany' } }
+  };
+  const websiteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: site.url + '/', author: { '@id': site.url + '/#person' } };
+
   let openXp = $state(new Set<number>([0]));
   function toggleXp(i: number) {
     const n = new Set(openXp);
@@ -132,12 +117,7 @@
   });
 </script>
 
-<svelte:head>
-  <title>Nabeel Malik — Full-stack AI Engineer</title>
-  <meta name="description" content={site.description} />
-  <meta property="og:title" content="Nabeel Malik — Full-stack AI Engineer" />
-  <meta property="og:description" content={site.description} />
-</svelte:head>
+<Seo title="Nabeel Malik — Full-stack AI Engineer" type="profile" jsonld={[personLd, websiteLd]} />
 
 <header class="hero">
   <Molten />

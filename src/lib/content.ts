@@ -86,5 +86,47 @@ export const site = {
   location: 'Bayreuth, Germany',
   github: 'https://github.com/mnmalikdev',
   linkedin: 'https://linkedin.com/in/nabeelmalik97',
-  description: 'Full-stack AI engineer building LLM-powered products on real-time backends. Python, TypeScript, Kafka, Postgres. Based in Bayreuth, Germany.'
+  fullName: 'Muhammad Nabeel Malik',
+  jobTitle: 'Full-stack AI Engineer',
+  description: 'Nabeel Malik — full-stack AI engineer in Bayreuth, Germany. Builds LLM agents and real-time backends with Python, FastAPI, NestJS, Kafka and PostgreSQL.',
+  ogImage: '/og.jpg',
+  knowsAbout: ['LLM agents', 'Agent harnesses', 'Tool calling', 'RAG', 'Python', 'FastAPI', 'SQLAlchemy', 'TypeScript', 'NestJS', 'SvelteKit', 'React', 'PostgreSQL', 'Kafka', 'Redis', 'AWS', 'Azure', 'Industrial IoT', 'Injection molding software']
 };
+
+export type Xp = { when: string; org: string; role: string; where: string; url?: string; groups?: { title?: string; url?: string; items: string[] }[] };
+export const experience: Xp[] = [
+    { when: 'Jan 2026 — Now', org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
+      { items: [
+        'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
+        'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
+        'Redesigned the production logbook into a cross-entity, real-time schema (NestJS, PostgreSQL, Drizzle, Kafka).',
+        'Multi-cavity experiment configuration in SvelteKit 5 for process engineers.'
+      ] }
+    ] },
+    { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', url: 'https://mlarteka.com/', role: 'Software engineer (staff augmentation) · now Mlarteka', where: 'Canada · Remote', groups: [
+      { title: 'MonieCorp — fintech product', items: [
+        'React + TypeScript + shadcn components: page loads 25% faster, UI bugs down 40% after the refactor.',
+        '15+ SOLID admin-panel components; client feedback loop cut from 3 days to 24 hours.',
+        'Multi-step form for tiered currency margins: setup from 20+ min to under 4 min per currency pair.',
+        'CSP Level 3 with nonce-based whitelisting — blocked 100% of inline-script attempts in pen testing.'
+      ] },
+      { title: 'Staples Canada', items: [
+        'Mixpanel tracking for 100k+ users (views, add-to-cart, checkout) — helped lift conversions 12%.',
+        'Built print-product customization end to end with the Canva API — engagement up 20%.',
+        'Fixed 30+ production bugs inside 4-hour SLAs, keeping 99.9% uptime through peak sales.'
+      ] }
+    ] },
+    { when: 'Apr 2022 — May 2024', org: 'Code Huddle', role: 'Associate software engineer · intern Apr–Jun 2022', where: 'Islamabad, PK', groups: [
+      { title: 'GYMYG — virtual gym partner (US startup)', url: 'https://gymyg.fit/', items: [
+        'NestJS REST APIs with JWT RBAC serving 10K DAU at under 200 ms P95.',
+        'Stripe monthly subscriptions, $15k+ processed.',
+        'Video load times down ~30% with FFmpeg compression and CloudFront edge delivery.',
+        'CI/CD with GitHub Actions and AWS CodePipeline — deploys 40% faster.'
+      ] },
+      { title: 'OrderMe — QR ordering MVP (Italian startup)', url: 'https://orderme.io/', items: [
+        'Firebase Auth + Firestore backend handling 100+ daily orders.',
+        'shadcn/ui + Tailwind admin panel for menus — owner setup time down 60%.'
+      ] }
+    ] },
+    { when: 'Feb 2018 — Feb 2022', org: 'COMSATS', role: 'Bachelor of Science in Software Engineering', where: 'Islamabad, PK' }
+  ];

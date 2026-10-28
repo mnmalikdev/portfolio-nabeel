@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import { href } from '$lib/link';
   import { posts, allTags, fmtDate } from '$lib/content';
   import { gsap, chars, reveal } from '$lib/motion';
@@ -22,10 +23,7 @@
   }
 </script>
 
-<svelte:head>
-  <title>Writing — Nabeel Malik</title>
-  <meta name="description" content="Notes on backend engineering, real-time systems and building software for manufacturing." />
-</svelte:head>
+<Seo title="Writing — Nabeel Malik" description="Notes by Nabeel Malik on AI engineering, LLM agents, event-driven backends and real-time systems." path="/blog/" />
 
 <header class="page-head">
   <h1 use:chars>Writ<span class="serif">ing</span></h1>

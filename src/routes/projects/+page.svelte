@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Seo from '$lib/components/Seo.svelte';
   import { href } from '$lib/link';
   import { onMount } from 'svelte';
   import { projects, allTags } from '$lib/content';
@@ -29,10 +30,7 @@
   }
 </script>
 
-<svelte:head>
-  <title>Work — Nabeel Malik</title>
-  <meta name="description" content="Selected projects by Nabeel Malik: real-time industrial software, data pipelines, and web apps." />
-</svelte:head>
+<Seo title="Work — Nabeel Malik" description="Projects by Nabeel Malik, full-stack AI engineer: Claire (an AI production agent), LLM pipelines, real-time industrial backends and web apps." path="/projects/" />
 
 <header class="page-head">
   <h1 use:chars>Work<span class="serif">.</span></h1>
