@@ -91,20 +91,21 @@ export const site = {
   jobTitle: 'Full-stack AI Engineer',
   description: 'Nabeel Malik — full-stack AI engineer in Bayreuth, Germany. Builds LLM agents and real-time backends with Python, FastAPI, NestJS, Kafka and PostgreSQL.',
   ogImage: '/og.jpg',
-  knowsAbout: ['LLM agents', 'Agent harnesses', 'Tool calling', 'RAG', 'Python', 'FastAPI', 'SQLAlchemy', 'TypeScript', 'NestJS', 'SvelteKit', 'React', 'PostgreSQL', 'Kafka', 'Redis', 'AWS', 'Azure', 'Industrial IoT', 'Injection molding software']
+  knowsAbout: ['LLM agents', 'Agent harnesses', 'Tool calling', 'RAG', 'Evals', 'LlamaIndex', 'Self-hosted LLMs (Qwen, Ollama)', 'Whisper speech-to-text', 'Neo4j knowledge graphs', 'Python', 'FastAPI', 'SQLAlchemy', 'TypeScript', 'NestJS', 'SvelteKit', 'React', 'PostgreSQL', 'Kafka', 'Redis', 'AWS', 'Azure', 'Industrial IoT', 'Injection molding software']
 };
 
 export type Xp = { when: string; org: string; role: string; where: string; url?: string; current?: boolean; steps?: { title: string; when: string }[]; groups?: { title?: string; url?: string; items: string[] }[] };
 export const experience: Xp[] = [
     { when: 'Jan 2026 — Now', current: true, org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer (full-time since Jul 2026; part-time Jan–Jul 2026)', steps: [{ title: 'Full-stack AI engineer', when: 'Jul 2026 — Now · Full-time' }, { title: 'Full-stack engineer', when: 'Jan — Jul 2026 · Part-time' }], where: 'Aachen, DE · Remote', groups: [
       { items: [
-        'Built a FastAPI backend and 12 agent tools for Claire, an injection-molding AI assistant on the Claude API: operators log defects, write shift handovers and edit assets from chat, with human confirmation before every write.',
+        'Migrated the AI agent from a self-hosted Qwen stack (LlamaIndex, ReAct) to the Anthropic Claude API, removing the legacy engine and redundant endpoints.',
+        'Built a FastAPI backend and 12 native agent tools on Claude Sonnet 5.5 for Claire, an injection-molding AI assistant: operators log defects, write shift handovers and edit assets from chat, with human confirmation before every write.',
         'Designed the agent harness to report only what it can verify — "detection not configured" instead of a false "no anomaly" — and kept user PII out of model context.',
         'Built evals that test Claire\'s answers against real production questions, catching regressions before each release.',
         'Built the shift-handover module end to end (shift plans with history, crew rostering, chat and voice entries, notifications, images), used across 3 plants and 40+ shifts per week.',
         'Shipped 56 merged PRs in a full-stack TypeScript monorepo (NestJS, SvelteKit 5, PostgreSQL/Drizzle, Redis), owning features from schema to UI, backed by 250+ unit, integration and E2E tests.',
         'Made real-time machine-data views up to 160x faster by moving them from a 1.4-billion-row table to roll-up tables; 30-day dashboards load in 16 ms instead of 1,150 ms.',
-        'Part-time phase: rebuilt the production logbook as a real-time feed (WebSockets) linking 5+ entity types, migrated it to JSONB with zero downtime, and extended experiments from single- to multi-cavity molds.'
+        'Part-time phase: built the first AI assistant on self-hosted Qwen models (35B for chat, 1.5B for routing) with LlamaIndex ReAct agents and a Neo4j knowledge graph, voice handovers on self-hosted Whisper, and a real-time logbook over WebSockets.',
       ] }
     ] },
     { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', url: 'https://mlarteka.com/', role: 'Software engineer (staff augmentation) · now Mlarteka', where: 'Canada · Remote', groups: [
