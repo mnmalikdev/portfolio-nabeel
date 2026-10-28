@@ -24,7 +24,7 @@ export default {
     })
   ],
   kit: {
-    adapter: adapter(PREVIEW ? { fallback: 'index.html' } : {}),
+    adapter: adapter(PREVIEW ? { fallback: 'index.html' } : undefined),
     appDir: 'app',
     paths: { relative: true },
     router: { type: PREVIEW ? 'hash' : 'pathname' }
