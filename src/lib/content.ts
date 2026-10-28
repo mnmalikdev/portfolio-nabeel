@@ -99,8 +99,7 @@ export const experience: Xp[] = [
     { when: 'Jan 2026 — Now', current: true, org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer (full-time since Jul 2026; part-time Jan–Jul 2026)', steps: [{ title: 'Full-stack AI engineer', when: 'Jul 2026 — Now · Full-time' }, { title: 'Full-stack engineer', when: 'Jan — Jul 2026 · Part-time' }], where: 'Aachen, DE · Remote', groups: [
       { items: [
         'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
-        'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
-        'Digital shift handover protocol, so open issues and machine status move between shifts in a structured format instead of paper notes.',
+        'Built the shift handover feature end to end, manual and voice: operators speak a handover in about 1 minute instead of typing a 10-minute report; speech-to-text plus LLM extraction fills the fields.',
         'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry (NestJS, PostgreSQL, Drizzle, Kafka).',
         'Zero-downtime migration from plain text to JSONB with Drizzle ORM — backfills kept 100% data integrity across all tenants.',
         'Made real-time machine-data views up to 160x faster by moving them from a 1.4-billion-row table to roll-up tables; 30-day dashboards load in 16 ms instead of 1,150 ms.',
