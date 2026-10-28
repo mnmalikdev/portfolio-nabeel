@@ -10,7 +10,7 @@
   }
 </script>
 
-<section class="contact" id="contact">
+<section class="contact" id="contact" data-nav="contact">
   <div>
     <div class="eyebrow mono">Contact</div>
     <h2 class="big" use:lines>

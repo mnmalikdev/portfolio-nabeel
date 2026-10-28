@@ -119,7 +119,7 @@
 
 <Seo title="Nabeel Malik — Full-stack AI Engineer" type="profile" jsonld={[personLd, websiteLd]} />
 
-<header class="hero">
+<header class="hero" data-nav="home">
   <Molten />
   {#if portrait}<div class="portrait" aria-hidden="true"><img src={portrait} alt="" /></div>{/if}
   <div class="hero-top mono hero-fade">
@@ -145,7 +145,7 @@
 
 <Marquee words={['LLM pipelines', 'Python', 'Agents', 'FastAPI', 'RAG', 'Event-driven', 'Kafka', 'SvelteKit', 'NestJS', 'Postgres', 'Speech-to-text', 'Real-time']} />
 
-<section id="about">
+<section id="about" data-nav="about">
   <div class="eyebrow mono" use:reveal={{ y: 0 }}>01 — About</div>
   <p class="about-text" bind:this={about}>
     I build <span class="serif">AI-powered</span> systems end to end — LLM pipelines, voice and agents on event-driven backends. AI that ships to production, not one that lives in a notebook. I like knowing <span class="serif">why</span> things work, not only that they do.
@@ -158,7 +158,7 @@
   </div>
 </section>
 
-<section class="work" bind:this={work}>
+<section class="work" data-nav="work" bind:this={work}>
   <div class="work-head mono"><span>02 — Selected work</span><a href={href(`/projects/`)} class="all">All projects →</a></div>
   <div class="work-track" bind:this={track}>
     <div class="work-intro">
@@ -186,7 +186,7 @@
 </section>
 
 {#if latest.length}
-  <section class="writing">
+  <section class="writing" data-nav="writing">
     <div class="w-head">
       <div class="eyebrow mono" style="margin:0">03 — Writing</div>
       <a href={href(`/blog/`)} class="mono">All posts →</a>
@@ -206,7 +206,7 @@
   </section>
 {/if}
 
-<section id="experience">
+<section id="experience" data-nav="about">
   <div class="eyebrow mono">04 — The path so far</div>
   <div class="xp-list" use:reveal={{ children: true, y: 50 }}>
     {#each xps as x, i}
@@ -234,7 +234,7 @@
   </div>
 </section>
 
-<section id="stack">
+<section id="stack" data-nav="about">
   <div class="stack-wrap">
     <h2>Tools I<br />reach <span class="serif">for</span></h2>
     <div>
@@ -253,7 +253,7 @@
   </div>
 </section>
 
-<section class="quote">
+<section class="quote" data-nav="about">
   <blockquote use:lines>
     <span class="ln"><span>Make it work,</span></span>
     <span class="ln"><span>make it <span class="serif">right,</span></span></span>
