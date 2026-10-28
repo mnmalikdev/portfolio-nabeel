@@ -100,7 +100,8 @@ export const experience: Xp[] = [
       { items: [
         'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
         'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
-        'Project owner for 3 core SaaS projects (Svelte, NestJS); PostgreSQL partitioning and vacuum tuning for 240M+ monthly time-series records, multi-tenant.',
+        'Digital shift handover protocol, so open issues and machine status move between shifts in a structured format instead of paper notes.',
+        'History and roll-up tables over 240M+ monthly time-series records, plus partitioning and vacuum tuning, so dashboards read pre-aggregated data.',
         'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry (NestJS, PostgreSQL, Drizzle, Kafka).',
         'Zero-downtime migration from plain text to JSONB with Drizzle ORM — backfills kept 100% data integrity across all tenants.',
         'Multi-cavity experiment configuration in SvelteKit 5 for process engineers.'
