@@ -41,7 +41,7 @@
         'Video load times down ~30% with FFmpeg compression and CloudFront edge delivery.',
         'CI/CD with GitHub Actions and AWS CodePipeline — deploys 40% faster.'
       ] },
-      { title: 'Ordinami — QR ordering MVP (Italian startup)', url: 'https://orderme.io/', items: [
+      { title: 'OrderMe — QR ordering MVP (Italian startup)', url: 'https://orderme.io/', items: [
         'Firebase Auth + Firestore backend handling 100+ daily orders.',
         'shadcn/ui + Tailwind admin panel for menus — owner setup time down 60%.'
       ] }
