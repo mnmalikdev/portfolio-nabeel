@@ -13,7 +13,7 @@
 
   type Xp = { when: string; org: string; role: string; where: string; url?: string; groups?: { title?: string; items: string[] }[] };
   const xps: Xp[] = [
-    { when: 'Jan 2026 — Now', org: 'OSPHIM', url: 'https://www.osphim.com/de', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
+    { when: 'Jan 2026 — Now', org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
       { items: [
         'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
         'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
