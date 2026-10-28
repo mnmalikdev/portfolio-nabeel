@@ -5,7 +5,7 @@ year: "2025"
 role: Full-stack engineer
 client: OSPHIM
 tags: [Industrial, Backend, Data modelling]
-stack: [NestJS, PostgreSQL, Drizzle, Kafka, SvelteKit]
+stack: [NestJS, WebSockets, PostgreSQL, Drizzle, SvelteKit]
 art: log
 order: 1
 featured: true

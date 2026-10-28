@@ -101,7 +101,7 @@ export const experience: Xp[] = [
         'Built Claire, an injection-molding AI agent that answers plain-language questions on live production data across 6 sources (Python, FastAPI, SQLAlchemy, Claude).',
         'Designed the agent\'s tool calls and built evals that test its answers against real production questions, catching regressions before each release.',
         'Built the shift handover feature end to end, manual and voice: operators speak a handover in about 1 minute instead of typing a 10-minute report; speech-to-text plus LLM extraction fills the fields.',
-        'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry (NestJS, PostgreSQL, Drizzle, Kafka).',
+        'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry, with live updates over WebSockets (NestJS, PostgreSQL, Drizzle).',
         'Zero-downtime migration from plain text to JSONB with Drizzle ORM — backfills kept 100% data integrity across all tenants.',
         'Made real-time machine-data views up to 160x faster by moving them from a 1.4-billion-row table to roll-up tables; 30-day dashboards load in 16 ms instead of 1,150 ms.',
         'Extended experiment configuration from single-cavity to multi-cavity molds (SvelteKit 5) — one setup for all cavities instead of one per cavity.'
