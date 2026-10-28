@@ -1,11 +1,11 @@
 ---
-title: Claire — AI agent for production data
-summary: OSPHIM's chat agent for molding shops. Ask about any job and Claire explains its problems, anomalies and experiment results from real production data, and says so when the data has gaps.
+title: Claire — injection-molding AI agent
+summary: OSPHIM's injection-molding AI agent. Ask about any job and Claire explains its problems, anomalies and experiment results from real production data, and says so when the data has gaps.
 year: "2026"
 role: Full-stack AI engineer
 client: OSPHIM · AI
 tags: [AI, Industrial, Backend]
-stack: [Claude (Anthropic), Agent harness, Tool calling, PostgreSQL, TypeScript]
+stack: [Python, FastAPI, SQLAlchemy, Claude (Anthropic), Agent harness, Tool calling]
 art: agents
 order: 0
 featured: true
@@ -18,7 +18,7 @@ A molding job leaves data everywhere: experiments, machine settings, quality che
 
 ## What Claire does
 
-Claire is a chat agent that sits on top of that data. You ask in plain language and it answers from the actual records, not from vibes.
+Claire is an injection-molding AI agent that sits on top of that data. You ask in plain language and it answers from the actual records, not from vibes.
 
 - **Explain any job.** Its problems, anomalies and experiment results, in one answer.
 - **Follow a job across its life.** Experiment → setup → validation → production, so you can see how a decision early on shows up later.
@@ -30,7 +30,7 @@ Claire is a chat agent that sits on top of that data. You ask in plain language 
 
 Claire runs on an **agent harness**: the model never touches the database directly. It gets a set of tools — find a job, fetch its chain, read its settings and quality data, look up handovers and the problem catalogue — and the harness decides what it can call, validates the results and keeps everything scoped to the right tenant.
 
-It runs on Anthropic's Claude models (Sonnet), with the harness choosing the model per task.
+The service is **Python + FastAPI**, with **SQLAlchemy** as the data layer the tools read through. It runs on Anthropic's Claude models (Sonnet), with the harness choosing the model per task.
 
 ## Honest by design
 
