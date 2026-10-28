@@ -21,7 +21,7 @@
         'Multi-cavity experiment configuration in SvelteKit 5 for process engineers.'
       ] }
     ] },
-    { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', role: 'Software engineer', where: 'Canada · Remote', groups: [
+    { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', url: 'https://mlarteka.com/', role: 'Software engineer (staff augmentation) · now Mlarteka', where: 'Canada · Remote', groups: [
       { title: 'MonieCorp — fintech product', items: [
         'React + TypeScript + shadcn components: page loads 25% faster, UI bugs down 40% after the refactor.',
         '15+ SOLID admin-panel components; client feedback loop cut from 3 days to 24 hours.',
