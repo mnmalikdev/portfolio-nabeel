@@ -103,8 +103,7 @@ export const experience: Xp[] = [
         'Digital shift handover protocol, so open issues and machine status move between shifts in a structured format instead of paper notes.',
         'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry (NestJS, PostgreSQL, Drizzle, Kafka).',
         'Zero-downtime migration from plain text to JSONB with Drizzle ORM — backfills kept 100% data integrity across all tenants.',
-        'Moved 6 product areas off a 1.4-billion-row raw table onto hourly roll-up and value-history tables: 30-day dashboards 1,150 ms → 16 ms, 90-day explorer 2,240 ms → 14 ms, change-log payload 40 MB → 1.4 kB.',
-        'Fixed set-point detection that only scanned the first 5,000 readings and silently missed changes on long jobs.',
+        'Made real-time machine-data views up to 160x faster by moving them from a 1.4-billion-row table to roll-up tables; 30-day dashboards load in 16 ms instead of 1,150 ms.',
         'Extended experiment configuration from single-cavity to multi-cavity molds (SvelteKit 5) — one setup for all cavities instead of one per cavity.'
       ] }
     ] },
