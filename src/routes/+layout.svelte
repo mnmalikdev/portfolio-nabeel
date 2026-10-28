@@ -8,6 +8,10 @@
   import Cursor from '$lib/components/Cursor.svelte';
   import Loader from '$lib/components/Loader.svelte';
   import Contact from '$lib/components/Contact.svelte';
+  import { injectAnalytics } from '@vercel/analytics/sveltekit';
+  import { dev } from '$app/environment';
+
+  injectAnalytics({ mode: dev ? 'development' : 'production' });
 
   let { children } = $props();
   let curtain: HTMLDivElement;
