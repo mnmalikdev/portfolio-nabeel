@@ -16,7 +16,7 @@
 </script>
 
 <div class="loader" bind:this={el} aria-hidden="true">
-  <div class="row mono"><span>Nabeel Malik</span><span>Portfolio — 2026</span></div>
+  <div class="row mono"><span>Nabeel Malik</span><span>Portfolio — {new Date().getFullYear()}</span></div>
   <div>
     <div class="row end"><span class="mono">Warming up the mold…</span><span class="count">{count}</span></div>
     <div class="bar"><i style="width:{count}%"></i></div>

@@ -32,7 +32,7 @@
 </script>
 
 <nav>
-  <a href={href('/')} class="logo" use:magnetic>NM<sup>©26</sup></a>
+  <a href={href('/')} class="logo" use:magnetic>NM</a>
   <ul class="mono">
     <li class="home" class:off={page.url.pathname === '/'}><a class="link" href={href('/')}><span>Home</span><span>Home</span></a></li>
     {#each links as l}
@@ -51,7 +51,6 @@
 <style>
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 120; display: flex; justify-content: space-between; align-items: center; padding: 22px var(--pad); mix-blend-mode: difference; color: var(--paper); }
   .logo { font-weight: 700; font-size: 20px; letter-spacing: -0.04em; display: inline-block; }
-  .logo sup { font-family: var(--mono); font-size: 9px; font-weight: 400; }
   ul { display: flex; gap: 28px; list-style: none; }
   .link { position: relative; overflow: hidden; display: inline-block; height: 1.4em; }
   button.link { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
