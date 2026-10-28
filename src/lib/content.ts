@@ -93,9 +93,9 @@ export const site = {
   knowsAbout: ['LLM agents', 'Agent harnesses', 'Tool calling', 'RAG', 'Python', 'FastAPI', 'SQLAlchemy', 'TypeScript', 'NestJS', 'SvelteKit', 'React', 'PostgreSQL', 'Kafka', 'Redis', 'AWS', 'Azure', 'Industrial IoT', 'Injection molding software']
 };
 
-export type Xp = { when: string; org: string; role: string; where: string; url?: string; groups?: { title?: string; url?: string; items: string[] }[] };
+export type Xp = { when: string; org: string; role: string; where: string; url?: string; current?: boolean; steps?: { title: string; when: string }[]; groups?: { title?: string; url?: string; items: string[] }[] };
 export const experience: Xp[] = [
-    { when: 'Jan 2026 — Now', org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
+    { when: 'Jan 2026 — Now', current: true, org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer (full-time since Jul 2026; part-time Jan–Jul 2026)', steps: [{ title: 'Full-stack AI engineer', when: 'Jul 2026 — Now · Full-time' }, { title: 'Full-stack engineer', when: 'Jan — Jul 2026 · Part-time' }], where: 'Aachen, DE · Remote', groups: [
       { items: [
         'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
         'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
@@ -116,7 +116,7 @@ export const experience: Xp[] = [
         'Fixed 30+ production bugs inside 4-hour SLAs, keeping 99.9% uptime through peak sales.'
       ] }
     ] },
-    { when: 'Apr 2022 — May 2024', org: 'Code Huddle', role: 'Associate software engineer · intern Apr–Jun 2022', where: 'Islamabad, PK', groups: [
+    { when: 'Apr 2022 — May 2024', org: 'Code Huddle', role: 'Associate software engineer (Aug 2022–May 2024); product development intern (Apr–Jun 2022)', steps: [{ title: 'Associate software engineer', when: 'Aug 2022 — May 2024' }, { title: 'Product development intern', when: 'Apr — Jun 2022' }], where: 'Islamabad, PK', groups: [
       { title: 'GYMYG — virtual gym partner (US startup)', url: 'https://gymyg.fit/', items: [
         'NestJS REST APIs with JWT RBAC serving 10K DAU at under 200 ms P95.',
         'Stripe monthly subscriptions, $15k+ processed.',

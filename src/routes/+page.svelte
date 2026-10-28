@@ -204,10 +204,12 @@
   <div class="eyebrow mono">04 — The path so far</div>
   <div class="xp-list" use:reveal={{ children: true, y: 50 }}>
     {#each xps as x, i}
-      <div class="xp-item" class:open={openXp.has(i)}>
+      <div class="xp-item" class:open={openXp.has(i)} class:current={x.current}>
         {#if x.groups}
           <button class="xp" onclick={() => toggleXp(i)} aria-expanded={openXp.has(i)} data-cursor={openXp.has(i) ? 'Close' : 'Open'}>
-            <span class="mono">{x.when}</span><h4>{x.org}</h4><span class="role">{x.role}</span><span class="when mono">{x.where}<i class="plus" aria-hidden="true"></i></span>
+            <span class="mono xw">{#if x.current}{x.when.replace(/\s*—\s*Now$/, ' —')}<span class="now"><i></i>Now</span>{:else}{x.when}{/if}</span><h4>{x.org}</h4>
+            <span class="role">{#if x.steps}<span class="steps">{#each x.steps as st, k}<span class="step" class:latest={k === 0}><b>{st.title}</b><em class="mono">{st.when}</em></span>{/each}</span>{:else}{x.role}{/if}</span>
+            <span class="when mono">{x.where}<i class="plus" aria-hidden="true"></i></span>
           </button>
           <div class="xp-body"><div class="xp-inner">
             {#each x.groups as g}
@@ -342,7 +344,23 @@
   @media (max-width: 760px) { .posts a { grid-template-columns: 1fr; gap: 6px; } .posts a > :last-child { text-align: left; } }
 
   .xp-list { border-top: 1px solid var(--line); }
-  .xp-item { border-bottom: 1px solid var(--line); }
+  .xp-item { border-bottom: 1px solid var(--line); position: relative; }
+  .xp-item.current::after { content: ''; position: absolute; left: calc(-1 * var(--pad)); top: 0; bottom: 0; width: 3px; background: var(--heat); }
+  .xw { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .now { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px 3px 7px; border-radius: 99px; background: var(--heat); color: var(--ink); font-weight: 500; }
+  .now i { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); animation: blink 1.6s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: 0.25; } }
+  .xp:hover .now { background: var(--ink); color: var(--heat); } .xp:hover .now i { background: var(--heat); }
+  .steps { display: grid; gap: 12px; position: relative; padding-left: 16px; }
+  .steps::before { content: ''; position: absolute; left: 3px; top: 8px; bottom: 8px; width: 1px; background: var(--line); }
+  .step { position: relative; display: grid; gap: 2px; }
+  .step::before { content: ''; position: absolute; left: -16px; top: 7px; width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--mute); background: var(--ink); }
+  .step.latest::before { background: var(--heat); border-color: var(--heat); }
+  .step b { font-weight: 500; color: var(--paper); }
+  .step:not(.latest) b { color: var(--mute); font-weight: 400; }
+  .step em { font-style: normal; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
+  .xp:hover .step b, .xp:hover .step em { color: var(--ink); }
+  .xp:hover .step::before { border-color: var(--ink); } .xp:hover .steps::before { background: rgba(12, 12, 11, 0.4); }
   .xp { position: relative; width: 100%; text-align: left; font: inherit; color: inherit; display: grid; grid-template-columns: 170px 1.1fr 1.3fr 200px; gap: 20px; align-items: center; padding: 34px 0; overflow: hidden; cursor: pointer; }
   .xp.static { cursor: default; }
   .xp.static::before { display: none; }
