@@ -98,11 +98,11 @@ export type Xp = { when: string; org: string; role: string; where: string; url?:
 export const experience: Xp[] = [
     { when: 'Jan 2026 — Now', current: true, org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer (full-time since Jul 2026; part-time Jan–Jul 2026)', steps: [{ title: 'Full-stack AI engineer', when: 'Jul 2026 — Now · Full-time' }, { title: 'Full-stack engineer', when: 'Jan — Jul 2026 · Part-time' }], where: 'Aachen, DE · Remote', groups: [
       { items: [
-        'Shipped 56 merged PRs in a full-stack TypeScript monorepo (NestJS, SvelteKit 5, PostgreSQL/Drizzle, Redis), owning features from schema to UI, backed by 250+ unit, integration and E2E tests.',
         'Built 12 agent tools for Claire, an injection-molding AI assistant on the Claude API (Python, FastAPI): operators log defects, write shift handovers and edit assets from chat, with human confirmation before every write.',
         'Designed the agent harness to report only what it can verify — "detection not configured" instead of a false "no anomaly" — and kept user PII out of model context.',
         'Built evals that test Claire\'s answers against real production questions, catching regressions before each release.',
         'Built the shift-handover module end to end (shift plans with history, crew rostering, chat and voice entries, notifications, images), used across 3 plants and 40+ shifts per week.',
+        'Shipped 56 merged PRs in a full-stack TypeScript monorepo (NestJS, SvelteKit 5, PostgreSQL/Drizzle, Redis), owning features from schema to UI, backed by 250+ unit, integration and E2E tests.',
         'Made real-time machine-data views up to 160x faster by moving them from a 1.4-billion-row table to roll-up tables; 30-day dashboards load in 16 ms instead of 1,150 ms.',
         'Part-time phase: rebuilt the production logbook as a real-time feed (WebSockets) linking 5+ entity types, migrated it to JSONB with zero downtime, and extended experiments from single- to multi-cavity molds.'
       ] }
