@@ -261,7 +261,12 @@
     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%);
     -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%); mask-composite: intersect; }
   .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.05); opacity: 1; will-change: transform; }
-  @media (max-width: 760px) { .hero > .portrait { right: 0; left: 0; width: 100%; height: 78%; top: 70px; bottom: auto; } .portrait img { opacity: 0.55; } }
+  @media (max-width: 760px) {
+    /* mobile: photo on top in the flow, name overlaps the chest, everything else below — nothing on the face */
+    .hero > .portrait { position: relative; inset: auto; order: 0; width: calc(100% + 2 * var(--pad)); height: auto; aspect-ratio: 1 / 1.1; margin: 0 calc(-1 * var(--pad));
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 30%); mask-image: linear-gradient(to top, transparent 0%, #000 30%); }
+    .portrait img { opacity: 0.95; }
+  }
   .hero-top { position: absolute !important; top: 110px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; gap: 20px; }
   .hero-top p { max-width: 300px; color: rgba(236, 235, 228, 0.75); }
   .hero-top .r { text-align: right; }
@@ -278,7 +283,14 @@
   .scroll-cue i { display: block; width: 1px; height: 46px; background: var(--line); position: relative; overflow: hidden; }
   .scroll-cue i::after { content: ''; position: absolute; left: 0; top: -50%; width: 100%; height: 50%; background: var(--heat); animation: drip 1.8s cubic-bezier(0.7, 0, 0.3, 1) infinite; }
   @keyframes drip { to { top: 110%; } }
-  @media (max-width: 760px) { .hero-bottom { grid-template-columns: 1fr; } .scroll-cue { justify-self: start; } .hero-top { flex-direction: column; } .hero-top .r { text-align: left; } .hero-top .soc { justify-content: flex-start; } }
+  @media (max-width: 760px) {
+    .hero { justify-content: flex-start; padding-top: 64px; }
+    .title { order: 1; margin-top: -24vw; }
+    .hero-top { position: static !important; order: 2; flex-direction: column; gap: 14px; margin-top: 26px; }
+    .hero-bottom { order: 3; grid-template-columns: 1fr; }
+    .scroll-cue { display: none; }
+    .hero-top .r { text-align: left; } .hero-top .soc { justify-content: flex-start; }
+  }
 
   .about-text { font-size: clamp(30px, 4.6vw, 76px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 500; max-width: 1500px; }
   .about-text .serif { color: var(--heat); }
