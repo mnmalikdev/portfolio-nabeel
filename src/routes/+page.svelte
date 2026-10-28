@@ -10,6 +10,51 @@
   // Drop a photo at src/lib/assets/portrait.(jpg|png|webp) and it shows up in the hero. No file = no portrait.
   const portrait = Object.values(import.meta.glob<string>('/src/lib/assets/portrait.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' }))[0];
 
+  type Xp = { when: string; org: string; role: string; where: string; groups?: { title?: string; items: string[] }[] };
+  const xps: Xp[] = [
+    { when: 'Jan 2026 — Now', org: 'OSPHIM', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
+      { items: [
+        'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
+        'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
+        'Redesigned the production logbook into a cross-entity, real-time schema (NestJS, PostgreSQL, Drizzle, Kafka).',
+        'Multi-cavity experiment configuration in SvelteKit 5 for process engineers.'
+      ] }
+    ] },
+    { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', role: 'Software engineer', where: 'Canada · Remote', groups: [
+      { title: 'MonieCorp — fintech product', items: [
+        'React + TypeScript + shadcn components: page loads 25% faster, UI bugs down 40% after the refactor.',
+        '15+ SOLID admin-panel components; client feedback loop cut from 3 days to 24 hours.',
+        'Multi-step form for tiered currency margins: setup from 20+ min to under 4 min per currency pair.',
+        'CSP Level 3 with nonce-based whitelisting — blocked 100% of inline-script attempts in pen testing.'
+      ] },
+      { title: 'Staples Canada', items: [
+        'Mixpanel tracking for 100k+ users (views, add-to-cart, checkout) — helped lift conversions 12%.',
+        'Built print-product customization end to end with the Canva API — engagement up 20%.',
+        'Fixed 30+ production bugs inside 4-hour SLAs, keeping 99.9% uptime through peak sales.'
+      ] }
+    ] },
+    { when: 'Apr 2022 — May 2024', org: 'Code Huddle', role: 'Associate software engineer · intern Apr–Jun 2022', where: 'Islamabad, PK', groups: [
+      { title: 'GYMYG — virtual gym partner (US startup)', items: [
+        'NestJS REST APIs with JWT RBAC serving 10K DAU at under 200 ms P95.',
+        'Stripe monthly subscriptions, $15k+ processed.',
+        'Video load times down ~30% with FFmpeg compression and CloudFront edge delivery.',
+        'CI/CD with GitHub Actions and AWS CodePipeline — deploys 40% faster.'
+      ] },
+      { title: 'Ordinami — QR ordering MVP (Italian startup)', items: [
+        'Firebase Auth + Firestore backend handling 100+ daily orders.',
+        'shadcn/ui + Tailwind admin panel for menus — owner setup time down 60%.'
+      ] }
+    ] },
+    { when: 'Feb 2018 — Feb 2022', org: 'COMSATS', role: 'Bachelor of Science in Software Engineering', where: 'Islamabad, PK' }
+  ];
+  let openXp = $state(new Set<number>([0]));
+  function toggleXp(i: number) {
+    const n = new Set(openXp);
+    n.has(i) ? n.delete(i) : n.add(i);
+    openXp = n;
+    setTimeout(() => ScrollTrigger.refresh(), 700);
+  }
+
   const featured = projects.filter((p) => p.featured);
   const latest = posts.slice(0, 3);
 
@@ -98,7 +143,7 @@
   {#if portrait}<div class="portrait" aria-hidden="true"><img src={portrait} alt="" /></div>{/if}
   <div class="hero-top mono hero-fade">
     <p>Full-stack AI engineer ✦ LLM systems ✦ real-time backends</p>
-    <div class="r"><p>Bayreuth, DE<br />← Islamabad, PK</p><p class="soc"><a href={site.github} target="_blank" rel="noopener">GitHub ↗</a> <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></p></div>
+    <div class="r"><p><svg class="pin" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Bayreuth, DE<br />← Islamabad, PK</p><p class="soc"><a href={site.github} target="_blank" rel="noopener">GitHub ↗</a> <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></p></div>
   </div>
   <h1 class="title" bind:this={title} aria-label="Nabeel Malik">
     <span class="ln"><span class="l1">Nabeel</span></span>
@@ -177,10 +222,25 @@
 <section id="experience">
   <div class="eyebrow mono">04 — The path so far</div>
   <div class="xp-list" use:reveal={{ children: true, y: 50 }}>
-    <div class="xp"><span class="mono">2026 — Now</span><h4>OSPHIM</h4><span class="role">Full-stack AI engineer · LLM pipelines, agents and real-time backends for injection molding</span><span class="when mono">Aachen, DE · Remote</span></div>
-    <div class="xp"><span class="mono">2024 — 25</span><h4>mobileLIVE</h4><span class="role">Software engineer · Fintech admin platform (MonieCorp), Staples Canada print shop</span><span class="when mono">Canada · Remote</span></div>
-    <div class="xp"><span class="mono">2022 — 24</span><h4>Code Huddle</h4><span class="role">Associate software engineer · NestJS APIs at 10K DAU, Stripe billing, AWS CI/CD</span><span class="when mono">Islamabad, PK</span></div>
-    <div class="xp"><span class="mono">2018 — 22</span><h4>COMSATS</h4><span class="role">BS Software Engineering</span><span class="when mono">Islamabad, PK</span></div>
+    {#each xps as x, i}
+      <div class="xp-item" class:open={openXp.has(i)}>
+        {#if x.groups}
+          <button class="xp" onclick={() => toggleXp(i)} aria-expanded={openXp.has(i)} data-cursor={openXp.has(i) ? 'Close' : 'Open'}>
+            <span class="mono">{x.when}</span><h4>{x.org}</h4><span class="role">{x.role}</span><span class="when mono">{x.where}<i class="plus" aria-hidden="true"></i></span>
+          </button>
+          <div class="xp-body"><div class="xp-inner">
+            {#each x.groups as g}
+              <div class="xp-group">
+                {#if g.title}<p class="mono g-title">{g.title}</p>{/if}
+                <ul>{#each g.items as it}<li>{it}</li>{/each}</ul>
+              </div>
+            {/each}
+          </div></div>
+        {:else}
+          <div class="xp static"><span class="mono">{x.when}</span><h4>{x.org}</h4><span class="role">{x.role}</span><span class="when mono">{x.where}<i class="plus ghost" aria-hidden="true"></i></span></div>
+        {/if}
+      </div>
+    {/each}
   </div>
 </section>
 
@@ -190,7 +250,7 @@
     <div>
       {#each [
         ['AI & LLMs', ['Python', 'FastAPI', 'LLM extraction', 'RAG', 'Agents', 'Speech-to-text']],
-        ['Backend & data', ['NestJS', 'Node.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Kafka', 'Redis']],
+        ['Backend & data', ['NestJS', 'Node.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'TypeORM', 'Kafka', 'Redis']],
         ['Frontend', ['SvelteKit 5', 'React', 'React Native', 'Tailwind']],
         ['Infra & ops', ['Azure', 'Hetzner', 'AWS', 'Docker', 'Terraform', 'OpenTelemetry']]
       ] as [label, items]}
@@ -223,6 +283,7 @@
   .hero-top { position: absolute !important; top: 110px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; gap: 20px; }
   .hero-top p { max-width: 300px; color: rgba(236, 235, 228, 0.75); }
   .hero-top .r { text-align: right; }
+  .pin { display: inline-block; vertical-align: -1px; margin-right: 6px; color: var(--heat); }
   .hero-top .soc { margin-top: 10px; display: flex; gap: 16px; justify-content: flex-end; }
   .hero-top .soc a { color: var(--paper); border-bottom: 1px solid rgba(236, 235, 228, 0.35); }
   .title { font-weight: 700; font-size: clamp(64px, 17.5vw, 300px); max-width: 100%; line-height: 0.82; letter-spacing: -0.065em; text-transform: uppercase; }
@@ -287,7 +348,26 @@
   @media (max-width: 760px) { .posts a { grid-template-columns: 1fr; gap: 6px; } .posts a > :last-child { text-align: left; } }
 
   .xp-list { border-top: 1px solid var(--line); }
-  .xp { position: relative; display: grid; grid-template-columns: 130px 1.1fr 1.3fr 170px; gap: 20px; align-items: center; padding: 34px 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+  .xp-item { border-bottom: 1px solid var(--line); }
+  .xp { position: relative; width: 100%; text-align: left; font: inherit; color: inherit; display: grid; grid-template-columns: 170px 1.1fr 1.3fr 200px; gap: 20px; align-items: center; padding: 34px 0; overflow: hidden; cursor: pointer; }
+  .xp.static { cursor: default; }
+  .xp.static::before { display: none; }
+  .xp.static:hover > * { color: inherit; transform: none; }
+  .xp.static:hover .role { color: var(--mute); }
+  .plus { display: inline-block; position: relative; width: 12px; height: 12px; margin-left: 14px; vertical-align: middle; }
+  .plus::before, .plus::after { content: ''; position: absolute; left: 0; top: 50%; width: 100%; height: 1px; background: currentColor; transition: transform 0.5s var(--ease); }
+  .plus::after { transform: rotate(90deg); }
+  .open .plus::after { transform: rotate(0deg); }
+  .plus.ghost { visibility: hidden; }
+  .xp-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.6s var(--ease); }
+  .open .xp-body { grid-template-rows: 1fr; }
+  .xp-inner { overflow: hidden; display: grid; grid-template-columns: 170px 1fr; column-gap: 20px; }
+  .xp-group { grid-column: 2; padding-bottom: 26px; max-width: 900px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s, transform 0.6s var(--ease); }
+  .open .xp-group { opacity: 1; transform: none; transition-delay: 0.15s; }
+  .g-title { color: var(--heat); margin-bottom: 12px; }
+  .xp-group ul { list-style: none; display: grid; gap: 10px; }
+  .xp-group li { position: relative; padding-left: 22px; color: rgba(236, 235, 228, 0.82); font-size: clamp(15px, 1.15vw, 18px); line-height: 1.45; }
+  .xp-group li::before { content: '✦'; position: absolute; left: 0; top: 0.1em; font-size: 0.75em; color: var(--heat); }
   .xp::before { content: ''; position: absolute; inset: 0; background: var(--heat); transform: scaleY(0); transform-origin: bottom; transition: transform 0.6s var(--ease); z-index: 0; }
   .xp:hover::before { transform: scaleY(1); }
   .xp > * { position: relative; z-index: 1; transition: color 0.4s, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
@@ -296,7 +376,7 @@
   .xp h4 { font-size: clamp(28px, 3.6vw, 58px); letter-spacing: -0.045em; font-weight: 600; line-height: 1; }
   .role { color: var(--mute); }
   .when { text-align: right; }
-  @media (max-width: 760px) { .xp { grid-template-columns: 1fr; gap: 6px; } .when { text-align: left; } }
+  @media (max-width: 760px) { .xp { grid-template-columns: 1fr; gap: 6px; } .when { text-align: left; } .xp-inner { grid-template-columns: 1fr; } .xp-group { grid-column: 1; } }
 
   .stack-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 6vw; }
   .stack-wrap h2 { font-size: clamp(48px, 6vw, 104px); letter-spacing: -0.055em; line-height: 0.9; font-weight: 700; position: sticky; top: 110px; align-self: start; }

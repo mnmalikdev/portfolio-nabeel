@@ -81,6 +81,9 @@ export const site = {
   name: 'Nabeel Malik',
   url: 'https://portfolio-nabeel-malik.vercel.app',
   email: 'mnmalikdev@gmail.com',
+  phone: '+32 469 12 73 83',
+  whatsapp: 'https://wa.me/32469127383',
+  location: 'Bayreuth, Germany',
   github: 'https://github.com/mnmalikdev',
   linkedin: 'https://linkedin.com/in/nabeelmalik97',
   description: 'Full-stack AI engineer building LLM-powered products on real-time backends. Python, TypeScript, Kafka, Postgres. Based in Bayreuth, Germany.'

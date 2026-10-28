@@ -23,6 +23,11 @@
       <a class="email" href="mailto:{site.email}">{site.email}</a>
       <button class="mag" use:magnetic onclick={copy}><span>Copy<br />email ↗</span></button>
     </div>
+    <div class="reach mono">
+      <a href={site.whatsapp} target="_blank" rel="noopener">WhatsApp ↗</a>
+      <a href="tel:{site.phone.replace(/\s/g, '')}">{site.phone}</a>
+      <span><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg> {site.location}</span>
+    </div>
     <footer class="mono">
       <div class="socials">
         <a href={site.github} target="_blank" rel="noopener">GitHub</a>
@@ -45,6 +50,9 @@
   .mag { display: inline-grid; place-items: center; width: clamp(150px, 15vw, 210px); aspect-ratio: 1; border-radius: 50%; background: var(--ink); color: var(--paper); font-weight: 600; font-size: 18px; line-height: 1.1; }
   .mag span { pointer-events: none; }
   .email { font-size: clamp(24px, 3.4vw, 56px); letter-spacing: -0.04em; font-weight: 600; border-bottom: 2px solid var(--ink); line-height: 1.1; word-break: break-all; }
+  .reach { display: flex; flex-wrap: wrap; gap: 14px 34px; margin-top: 34px; font-size: 13px; }
+  .reach a, .reach span { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(12, 12, 11, 0.4); padding-bottom: 3px; }
+  .reach span { border-bottom-color: transparent; }
   footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid rgba(12, 12, 11, 0.25); padding-top: 18px; margin-top: 60px; }
   .socials { display: flex; gap: 26px; }
   .socials a { position: relative; }
