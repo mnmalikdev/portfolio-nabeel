@@ -175,9 +175,10 @@
 <section id="experience">
   <div class="eyebrow mono">04 — The path so far</div>
   <div class="xp-list" use:reveal={{ children: true, y: 50 }}>
-    <div class="xp"><span class="mono">Now</span><h4>OSPHIM</h4><span class="role">Full-stack AI engineer · Industrial SaaS for injection molding</span><span class="when mono">Bayreuth, DE</span></div>
-    <div class="xp"><span class="mono">Origins</span><h4>Freelance &amp; teams</h4><span class="role">Web &amp; mobile apps for SMBs — MERN, React Native, Expo</span><span class="when mono">Islamabad, PK</span></div>
-    <div class="xp"><span class="mono">BS</span><h4>COMSATS</h4><span class="role">Software Engineering</span><span class="when mono">Islamabad, PK</span></div>
+    <div class="xp"><span class="mono">2026 — Now</span><h4>OSPHIM</h4><span class="role">Full-stack AI engineer · LLM pipelines, agents and real-time backends for injection molding</span><span class="when mono">Aachen, DE · Remote</span></div>
+    <div class="xp"><span class="mono">2024 — 25</span><h4>mobileLIVE</h4><span class="role">Software engineer · Fintech admin platform (MonieCorp), Staples Canada print shop</span><span class="when mono">Canada · Remote</span></div>
+    <div class="xp"><span class="mono">2022 — 24</span><h4>Code Huddle</h4><span class="role">Associate software engineer · NestJS APIs at 10K DAU, Stripe billing, AWS CI/CD</span><span class="when mono">Islamabad, PK</span></div>
+    <div class="xp"><span class="mono">2018 — 22</span><h4>COMSATS</h4><span class="role">BS Software Engineering</span><span class="when mono">Islamabad, PK</span></div>
   </div>
 </section>
 
@@ -284,7 +285,7 @@
   @media (max-width: 760px) { .posts a { grid-template-columns: 1fr; gap: 6px; } .posts a > :last-child { text-align: left; } }
 
   .xp-list { border-top: 1px solid var(--line); }
-  .xp { position: relative; display: grid; grid-template-columns: 120px 1.3fr 1fr 140px; gap: 20px; align-items: center; padding: 34px 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+  .xp { position: relative; display: grid; grid-template-columns: 130px 1.1fr 1.3fr 170px; gap: 20px; align-items: center; padding: 34px 0; border-bottom: 1px solid var(--line); overflow: hidden; }
   .xp::before { content: ''; position: absolute; inset: 0; background: var(--heat); transform: scaleY(0); transform-origin: bottom; transition: transform 0.6s var(--ease); z-index: 0; }
   .xp:hover::before { transform: scaleY(1); }
   .xp > * { position: relative; z-index: 1; transition: color 0.4s, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
