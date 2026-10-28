@@ -372,7 +372,8 @@
   .step:not(.latest) b { color: var(--mute); font-weight: 400; }
   .step em { font-style: normal; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mute); }
   .xp:hover .step b, .xp:hover .step em { color: var(--ink); }
-  .xp:hover .step::before { border-color: var(--ink); } .xp:hover .steps::before { background: rgba(12, 12, 11, 0.4); }
+  .xp:hover .step::before { border-color: var(--ink); background: transparent; } .xp:hover .step.latest::before { background: var(--ink); }
+  .xp:hover .step:not(.latest) b, .xp:hover .step:not(.latest) em { opacity: 0.6; } .xp:hover .steps::before { background: rgba(12, 12, 11, 0.4); }
   .xp { position: relative; width: 100%; text-align: left; font: inherit; color: inherit; display: grid; grid-template-columns: 170px 1.1fr 1.3fr 200px; gap: 20px; align-items: center; padding: 34px 0; overflow: hidden; cursor: pointer; }
   .xp.static { cursor: default; }
   .xp.static::before { display: none; }
