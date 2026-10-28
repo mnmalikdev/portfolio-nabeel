@@ -98,7 +98,8 @@ export type Xp = { when: string; org: string; role: string; where: string; url?:
 export const experience: Xp[] = [
     { when: 'Jan 2026 — Now', current: true, org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer (full-time since Jul 2026; part-time Jan–Jul 2026)', steps: [{ title: 'Full-stack AI engineer', when: 'Jul 2026 — Now · Full-time' }, { title: 'Full-stack engineer', when: 'Jan — Jul 2026 · Part-time' }], where: 'Aachen, DE · Remote', groups: [
       { items: [
-        'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
+        'Built Claire, an injection-molding AI agent that answers plain-language questions on live production data across 6 sources (Python, FastAPI, SQLAlchemy, Claude).',
+        'Designed the agent\'s tool calls and built evals that test its answers against real production questions, catching regressions before each release.',
         'Built the shift handover feature end to end, manual and voice: operators speak a handover in about 1 minute instead of typing a 10-minute report; speech-to-text plus LLM extraction fills the fields.',
         'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry (NestJS, PostgreSQL, Drizzle, Kafka).',
         'Zero-downtime migration from plain text to JSONB with Drizzle ORM — backfills kept 100% data integrity across all tenants.',
