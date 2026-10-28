@@ -1,7 +1,6 @@
 <script lang="ts">
   import { site } from '$lib/content';
   import SocialIcon from '$lib/components/SocialIcon.svelte';
-  import { PREVIEW } from '$lib/link';
   import { lines, magnetic, scrollTo } from '$lib/motion';
 
   let toast = $state('');
@@ -33,7 +32,6 @@
       <div class="socials">
         <a href={site.github} target="_blank" rel="noopener"><SocialIcon name="github" size={13} /> GitHub</a>
         <a href={site.linkedin} target="_blank" rel="noopener"><SocialIcon name="linkedin" size={12} /> LinkedIn</a>
-        {#if !PREVIEW}<a href="/rss.xml">RSS</a>{/if}
       </div>
       <span>© {new Date().getFullYear()} Nabeel Malik</span>
       <button onclick={() => scrollTo(0)}>Back to top ↑</button>
