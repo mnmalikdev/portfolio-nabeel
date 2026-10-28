@@ -96,7 +96,7 @@
   {#if portrait}<div class="portrait" aria-hidden="true"><img src={portrait} alt="" /></div>{/if}
   <div class="hero-top mono hero-fade">
     <p>Full-stack AI engineer ✦ LLM systems ✦ real-time backends</p>
-    <p class="r">Bayreuth, DE<br />← Islamabad, PK</p>
+    <div class="r"><p>Bayreuth, DE<br />← Islamabad, PK</p><p class="soc"><a href={site.github} target="_blank" rel="noopener">GitHub ↗</a> <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></p></div>
   </div>
   <h1 class="title" bind:this={title} aria-label="Nabeel Malik">
     <span class="ln"><span class="l1">Nabeel</span></span>
@@ -114,7 +114,7 @@
 <section id="about">
   <div class="eyebrow mono" use:reveal={{ y: 0 }}>01 — About</div>
   <p class="about-text" bind:this={about}>
-    I started out shipping web and mobile apps for small businesses in Islamabad. Today I build <span class="serif">AI-powered</span> systems end to end — LLM extraction, voice pipelines and agents, sitting on event-driven backends for plastics &amp; injection-molding manufacturers, where a dropped event means a ruined batch, not a sad toast. I care about clean data models, honest architecture, and AI that ships to production instead of living in a notebook. I like knowing <span class="serif">why</span> things work, not only that they do.
+    I build <span class="serif">AI-powered</span> systems end to end — LLM pipelines, voice and agents on event-driven backends. AI that ships to production, not one that lives in a notebook. I like knowing <span class="serif">why</span> things work, not only that they do.
   </p>
   <div class="stats" use:reveal={{ children: true }}>
     <div class="stat"><div class="n" data-count="5">5<sup>+</sup></div><p class="mono">Years shipping production software</p></div>
@@ -220,6 +220,8 @@
   .hero-top { position: absolute !important; top: 110px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; gap: 20px; }
   .hero-top p { max-width: 300px; color: rgba(236, 235, 228, 0.75); }
   .hero-top .r { text-align: right; }
+  .hero-top .soc { margin-top: 10px; display: flex; gap: 16px; justify-content: flex-end; }
+  .hero-top .soc a { color: var(--paper); border-bottom: 1px solid rgba(236, 235, 228, 0.35); }
   .title { font-weight: 700; font-size: clamp(64px, 17.5vw, 300px); max-width: 100%; line-height: 0.82; letter-spacing: -0.065em; text-transform: uppercase; }
   .title .r { text-align: right; }
   @media (min-width: 761px) { .title { font-size: clamp(64px, 13.5vw, 250px); } .title .r { text-align: left; padding-left: 9vw; } }
@@ -230,7 +232,7 @@
   .scroll-cue i { display: block; width: 1px; height: 46px; background: var(--line); position: relative; overflow: hidden; }
   .scroll-cue i::after { content: ''; position: absolute; left: 0; top: -50%; width: 100%; height: 50%; background: var(--heat); animation: drip 1.8s cubic-bezier(0.7, 0, 0.3, 1) infinite; }
   @keyframes drip { to { top: 110%; } }
-  @media (max-width: 760px) { .hero-bottom { grid-template-columns: 1fr; } .scroll-cue { justify-self: start; } .hero-top { flex-direction: column; } .hero-top .r { text-align: left; } }
+  @media (max-width: 760px) { .hero-bottom { grid-template-columns: 1fr; } .scroll-cue { justify-self: start; } .hero-top { flex-direction: column; } .hero-top .r { text-align: left; } .hero-top .soc { justify-content: flex-start; } }
 
   .about-text { font-size: clamp(30px, 4.6vw, 76px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 500; max-width: 1500px; }
   .about-text .serif { color: var(--heat); }
