@@ -1,6 +1,7 @@
 <script lang="ts">
   import { href } from '$lib/link';
   import { onMount } from 'svelte';
+  import { assets } from '$app/paths';
   import { projects, posts, fmtDate, site } from '$lib/content';
   import { gsap, ScrollTrigger, setupGsap, reduced, whenIntroDone, splitChars, reveal, lines } from '$lib/motion';
   import Molten from '$lib/components/Molten.svelte';
@@ -19,6 +20,7 @@
     const chars2 = splitChars(title.querySelector('.l2')!);
     gsap.set([...chars, ...chars2], { yPercent: 115, rotate: 6 });
     gsap.set('.hero-fade', { autoAlpha: 0, y: 20 });
+    gsap.set('.portrait', { autoAlpha: 0, scale: 1.06 });
 
     const ctx = gsap.context(() => {
       // words in About light up on scroll
@@ -40,6 +42,8 @@
 
       // hero parallax
       gsap.to(title, { yPercent: -18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+      // portrait drifts slower than the title — depth
+      gsap.to('.portrait img', { yPercent: 10, scale: 1.08, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
       // counters
       document.querySelectorAll<HTMLElement>('[data-count]').forEach((n) => {
@@ -68,7 +72,8 @@
 
     whenIntroDone(() => {
       gsap.timeline({ delay: 0.05 })
-        .to([...chars, ...chars2], { yPercent: 0, rotate: 0, duration: 1.2, stagger: 0.035, ease: 'expo.out' })
+        .to('.portrait', { autoAlpha: 1, scale: 1, duration: 1.8, ease: 'expo.out' }, 0)
+        .to([...chars, ...chars2], { yPercent: 0, rotate: 0, duration: 1.2, stagger: 0.035, ease: 'expo.out' }, 0)
         .to('.hero-fade', { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }, '-=.9');
       ScrollTrigger.refresh();
     });
@@ -78,16 +83,17 @@
 </script>
 
 <svelte:head>
-  <title>Nabeel Malik — Full-stack Engineer</title>
+  <title>Nabeel Malik — Full-stack AI Engineer</title>
   <meta name="description" content={site.description} />
-  <meta property="og:title" content="Nabeel Malik — Full-stack Engineer" />
+  <meta property="og:title" content="Nabeel Malik — Full-stack AI Engineer" />
   <meta property="og:description" content={site.description} />
 </svelte:head>
 
 <header class="hero">
   <Molten />
+  <div class="portrait" aria-hidden="true"><img src="{assets}/images/nabeel.jpg" alt="" onerror={(e) => ((e.currentTarget as HTMLElement).parentElement!.style.display = 'none')} /></div>
   <div class="hero-top mono hero-fade">
-    <p>Full-stack engineer ✦ real-time systems ✦ industrial SaaS</p>
+    <p>Full-stack AI engineer ✦ LLM systems ✦ real-time backends</p>
     <p class="r">Bayreuth, DE<br />← Islamabad, PK</p>
   </div>
   <h1 class="title" bind:this={title} aria-label="Nabeel Malik">
@@ -95,18 +101,18 @@
     <span class="ln r"><span class="l2">Malik<span class="serif"> ✦</span></span></span>
   </h1>
   <div class="hero-bottom hero-fade">
-    <p class="lead">I build <span class="serif heat">real-time</span> software for factory floors — event-driven backends, sharp interfaces, and the infra in between.</p>
-    <p class="mono muted">5+ yrs · NestJS · SvelteKit · Kafka · Postgres</p>
+    <p class="lead">I build <span class="serif heat">AI-powered</span> products end to end — LLM pipelines and agents, event-driven backends, and the interfaces people actually use.</p>
+    <p class="mono muted">5+ yrs · Python · TypeScript · LLMs · Kafka · Postgres</p>
     <div class="scroll-cue mono"><span>Scroll</span><i></i></div>
   </div>
 </header>
 
-<Marquee words={['Event-driven', 'Kafka', 'SvelteKit', 'Real-time', 'NestJS', 'Postgres', 'Factory floors', 'Redis', 'LLM pipelines', 'Hetzner']} />
+<Marquee words={['LLM pipelines', 'Python', 'Agents', 'FastAPI', 'RAG', 'Event-driven', 'Kafka', 'SvelteKit', 'NestJS', 'Postgres', 'Speech-to-text', 'Real-time']} />
 
 <section id="about">
   <div class="eyebrow mono" use:reveal={{ y: 0 }}>01 — About</div>
   <p class="about-text" bind:this={about}>
-    I started out shipping web and mobile apps for small businesses in Islamabad. Today I engineer software for <span class="serif">plastics &amp; injection-molding</span> manufacturers — systems where a dropped event means a ruined batch, not a sad toast. I care about clean data models, honest architecture, and interfaces people on a shop floor actually enjoy. I like knowing <span class="serif">why</span> things work, not only that they do.
+    I started out shipping web and mobile apps for small businesses in Islamabad. Today I build <span class="serif">AI-powered</span> systems end to end — LLM extraction, voice pipelines and agents, sitting on event-driven backends for plastics &amp; injection-molding manufacturers, where a dropped event means a ruined batch, not a sad toast. I care about clean data models, honest architecture, and AI that ships to production instead of living in a notebook. I like knowing <span class="serif">why</span> things work, not only that they do.
   </p>
   <div class="stats" use:reveal={{ children: true }}>
     <div class="stat"><div class="n" data-count="5">5<sup>+</sup></div><p class="mono">Years shipping production software</p></div>
@@ -167,7 +173,7 @@
 <section id="experience">
   <div class="eyebrow mono">04 — The path so far</div>
   <div class="xp-list" use:reveal={{ children: true, y: 50 }}>
-    <div class="xp"><span class="mono">Now</span><h4>OSPHIM</h4><span class="role">Full-stack engineer · Industrial SaaS for injection molding</span><span class="when mono">Bayreuth, DE</span></div>
+    <div class="xp"><span class="mono">Now</span><h4>OSPHIM</h4><span class="role">Full-stack AI engineer · Industrial SaaS for injection molding</span><span class="when mono">Bayreuth, DE</span></div>
     <div class="xp"><span class="mono">Origins</span><h4>Freelance &amp; teams</h4><span class="role">Web &amp; mobile apps for SMBs — MERN, React Native, Expo</span><span class="when mono">Islamabad, PK</span></div>
     <div class="xp"><span class="mono">BS</span><h4>COMSATS</h4><span class="role">Software Engineering</span><span class="when mono">Islamabad, PK</span></div>
   </div>
@@ -178,10 +184,10 @@
     <h2>Tools I<br />reach <span class="serif">for</span></h2>
     <div>
       {#each [
-        ['Backend & data', ['NestJS', 'Node.js', 'FastAPI', 'PostgreSQL', 'Drizzle ORM', 'Kafka', 'Redis']],
-        ['Frontend', ['SvelteKit 5', 'TypeScript', 'React', 'React Native', 'Tailwind']],
-        ['Infra & ops', ['Azure', 'Hetzner', 'AWS', 'Docker', 'Terraform', 'OpenTelemetry']],
-        ['AI', ['LLM extraction', 'Speech-to-text', 'RAG', 'Agents']]
+        ['AI & LLMs', ['Python', 'FastAPI', 'LLM extraction', 'RAG', 'Agents', 'Speech-to-text']],
+        ['Backend & data', ['NestJS', 'Node.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Kafka', 'Redis']],
+        ['Frontend', ['SvelteKit 5', 'React', 'React Native', 'Tailwind']],
+        ['Infra & ops', ['Azure', 'Hetzner', 'AWS', 'Docker', 'Terraform', 'OpenTelemetry']]
       ] as [label, items]}
         <div class="group">
           <span class="mono">{label}</span>
@@ -204,6 +210,11 @@
 <style>
   .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) 36px; overflow: hidden; }
   .hero > :not(:global(canvas)) { position: relative; z-index: 1; }
+  .hero > .portrait { position: absolute; z-index: 0; right: 4vw; bottom: 0; width: min(44vw, 680px); height: 94%; pointer-events: none; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 38%), linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, transparent 0%, #000 38%), linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%); mask-composite: intersect; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.1) brightness(0.8); opacity: 0.8; will-change: transform; }
+  @media (max-width: 760px) { .hero > .portrait { right: 0; left: 0; width: 100%; height: 78%; top: 70px; bottom: auto; } .portrait img { opacity: 0.45; } }
   .hero-top { position: absolute !important; top: 110px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; gap: 20px; }
   .hero-top p { max-width: 300px; color: rgba(236, 235, 228, 0.75); }
   .hero-top .r { text-align: right; }

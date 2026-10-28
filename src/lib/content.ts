@@ -83,5 +83,5 @@ export const site = {
   email: 'mnmalikdev@gmail.com',
   github: 'https://github.com/mnmalikdev',
   linkedin: 'https://linkedin.com/in/nabeelmalik97',
-  description: 'Full-stack engineer building real-time software for factory floors. Based in Bayreuth, Germany.'
+  description: 'Full-stack AI engineer building LLM-powered products on real-time backends. Python, TypeScript, Kafka, Postgres. Based in Bayreuth, Germany.'
 };
