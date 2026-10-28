@@ -101,10 +101,11 @@ export const experience: Xp[] = [
         'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
         'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
         'Digital shift handover protocol, so open issues and machine status move between shifts in a structured format instead of paper notes.',
-        'History and roll-up tables over 240M+ monthly time-series records, plus partitioning and vacuum tuning, so dashboards read pre-aggregated data.',
         'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry (NestJS, PostgreSQL, Drizzle, Kafka).',
         'Zero-downtime migration from plain text to JSONB with Drizzle ORM — backfills kept 100% data integrity across all tenants.',
-        'Multi-cavity experiment configuration in SvelteKit 5 for process engineers.'
+        'Moved 6 product areas off a 1.4-billion-row raw table onto hourly roll-up and value-history tables: 30-day dashboards 1,150 ms → 16 ms, 90-day explorer 2,240 ms → 14 ms, change-log payload 40 MB → 1.4 kB.',
+        'Fixed set-point detection that only scanned the first 5,000 readings and silently missed changes on long jobs.',
+        'Extended experiment configuration from single-cavity to multi-cavity molds (SvelteKit 5) — one setup for all cavities instead of one per cavity.'
       ] }
     ] },
     { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', url: 'https://mlarteka.com/', role: 'Software engineer (staff augmentation) · now Mlarteka', where: 'Canada · Remote', groups: [
