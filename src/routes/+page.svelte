@@ -63,7 +63,7 @@
         });
         track.querySelectorAll<HTMLElement>('.card').forEach((c) => {
           // inner parallax only: the art is always visible, it just drifts as the card travels
-          const media = c.querySelector('.art')!.lastElementChild;
+          const media = c.querySelector('.art')?.lastElementChild;
           if (media) gsap.fromTo(media, { xPercent: 5, scale: 1.12 }, { xPercent: -5, scale: 1.12, ease: 'none', scrollTrigger: { trigger: c, containerAnimation: h, start: 'left right', end: 'right left', scrub: true } });
         });
       });
