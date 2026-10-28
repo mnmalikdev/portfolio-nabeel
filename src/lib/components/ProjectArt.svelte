@@ -37,7 +37,7 @@
         const x = 40 + i * 10.3, h = Math.abs(Math.sin(i * 0.37) * Math.cos(i * 0.11)) * 220 + 8, hot = i > 44 && i < 52;
         o += `<rect class="bar" x="${x.toFixed(1)}" y="${(260 - h / 2).toFixed(1)}" width="4" height="${h.toFixed(1)}" rx="2" fill="${hot ? H : P}" fill-opacity="${hot ? 1 : 0.55}" style="transform-origin:${(x + 2).toFixed(1)}px 260px"/>`;
       }
-      o += `<text x="40" y="470" fill="${P}" fill-opacity=".5" font-family="JetBrains Mono, monospace" font-size="14">{ "machine": "IMM-07", "issue": "short shot", "action": "raise hold pressure" }</text>`;
+      o += `<text x="40" y="470" fill="${P}" fill-opacity=".5" font-family="JetBrains Mono, monospace" font-size="14">{ "asset": "pump-07", "issue": "overheating", "action": "reduce load" }</text>`;
     } else if (kind === 'cavity') {
       for (let row = 0; row < 4; row++) for (let c = 0; c < 8; c++) {
         const x = 110 + c * 82, y = 110 + row * 82, hot = (row * 8 + c) % 7 === 3;

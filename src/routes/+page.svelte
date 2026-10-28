@@ -62,7 +62,9 @@
           scrollTrigger: { trigger: work, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, onUpdate: (s) => (progress.style.width = s.progress * 100 + '%') }
         });
         track.querySelectorAll<HTMLElement>('.card').forEach((c) => {
-          gsap.from(c.querySelector('.art'), { clipPath: 'inset(0 0 0 100% round 6px)', ease: 'none', scrollTrigger: { trigger: c, containerAnimation: h, start: 'left 100%', end: 'left 55%', scrub: true } });
+          // inner parallax only: the art is always visible, it just drifts as the card travels
+          const media = c.querySelector('.art')!.lastElementChild;
+          if (media) gsap.fromTo(media, { xPercent: 5, scale: 1.12 }, { xPercent: -5, scale: 1.12, ease: 'none', scrollTrigger: { trigger: c, containerAnimation: h, start: 'left right', end: 'right left', scrub: true } });
         });
       });
       mm.add('(max-width: 860px)', () => {

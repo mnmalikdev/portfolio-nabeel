@@ -24,7 +24,7 @@ Shift handovers are where knowledge goes to die. People talk fast, nobody writes
 4. The result lands in the system as data, linked to the right entities.
 
 ```json
-{ "machine": "IMM-07", "issue": "short shot", "action": "raise hold pressure" }
+{ "asset": "pump-07", "issue": "overheating", "action": "reduce load" }
 ```
 
 ## Notes
