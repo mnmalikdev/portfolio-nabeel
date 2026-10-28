@@ -24,6 +24,7 @@
       <button class="mag" use:magnetic onclick={copy}><span>Copy<br />email ↗</span></button>
     </div>
     <div class="reach mono">
+      <a href={site.cv} download>Download CV ↓</a>
       <a href={site.whatsapp} target="_blank" rel="noopener">WhatsApp ↗</a>
       <a href="tel:{site.phone.replace(/\s/g, '')}">{site.phone}</a>
       <span><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg> {site.location}</span>

@@ -124,7 +124,7 @@
   {#if portrait}<div class="portrait" aria-hidden="true"><img src={portrait} alt="" /></div>{/if}
   <div class="hero-top mono hero-fade">
     <p>Full-stack AI engineer ✦ LLM systems ✦ real-time backends</p>
-    <div class="r"><p><svg class="pin" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Bayreuth, DE<br />← Islamabad, PK</p><p class="soc"><a href={site.github} target="_blank" rel="noopener"><SocialIcon name="github" size={13} /> GitHub</a> <a href={site.linkedin} target="_blank" rel="noopener"><SocialIcon name="linkedin" size={12} /> LinkedIn</a></p></div>
+    <div class="r"><p><svg class="pin" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Bayreuth, DE<br />← Islamabad, PK</p><p class="soc"><a href={site.github} target="_blank" rel="noopener"><SocialIcon name="github" size={13} /> GitHub</a> <a href={site.linkedin} target="_blank" rel="noopener"><SocialIcon name="linkedin" size={12} /> LinkedIn</a> <a href={site.cv} download>CV ↓</a></p></div>
   </div>
   <h1 class="title" bind:this={title} aria-label="Nabeel Malik">
     <span class="ln"><span class="l1">Nabeel</span></span>

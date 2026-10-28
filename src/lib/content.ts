@@ -84,6 +84,7 @@ export const site = {
   phone: '+32 469 12 73 83',
   whatsapp: 'https://wa.me/32469127383',
   location: 'Bayreuth, Germany',
+  cv: '/Muhammad-Nabeel-Malik-CV.pdf',
   github: 'https://github.com/mnmalikdev',
   linkedin: 'https://linkedin.com/in/nabeelmalik97',
   fullName: 'Muhammad Nabeel Malik',
@@ -99,7 +100,9 @@ export const experience: Xp[] = [
       { items: [
         'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
         'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
-        'Redesigned the production logbook into a cross-entity, real-time schema (NestJS, PostgreSQL, Drizzle, Kafka).',
+        'Project owner for 3 core SaaS projects (Svelte, NestJS); PostgreSQL partitioning and vacuum tuning for 240M+ monthly time-series records, multi-tenant.',
+        'Redesigned the production logbook into a cross-entity, real-time schema linking 5+ entity types per entry (NestJS, PostgreSQL, Drizzle, Kafka).',
+        'Zero-downtime migration from plain text to JSONB with Drizzle ORM — backfills kept 100% data integrity across all tenants.',
         'Multi-cavity experiment configuration in SvelteKit 5 for process engineers.'
       ] }
     ] },
