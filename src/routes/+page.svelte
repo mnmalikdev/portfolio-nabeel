@@ -212,16 +212,17 @@
 <style>
   .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) 36px; overflow: hidden; }
   .hero > :not(:global(canvas)) { position: relative; z-index: 1; }
-  .hero > .portrait { position: absolute; z-index: 0; right: 4vw; bottom: 0; width: min(44vw, 680px); height: 94%; pointer-events: none; overflow: hidden;
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 38%), linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%);
-    -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, transparent 0%, #000 38%), linear-gradient(to right, transparent 0%, #000 22%, #000 78%, transparent 100%); mask-composite: intersect; }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.1) brightness(0.8); opacity: 0.8; will-change: transform; }
-  @media (max-width: 760px) { .hero > .portrait { right: 0; left: 0; width: 100%; height: 78%; top: 70px; bottom: auto; } .portrait img { opacity: 0.45; } }
+  .hero > .portrait { position: absolute; z-index: 0; right: 0; bottom: 0; width: min(42vw, 760px); height: 100%; pointer-events: none; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%);
+    -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%); mask-composite: intersect; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.05); opacity: 1; will-change: transform; }
+  @media (max-width: 760px) { .hero > .portrait { right: 0; left: 0; width: 100%; height: 78%; top: 70px; bottom: auto; } .portrait img { opacity: 0.55; } }
   .hero-top { position: absolute !important; top: 110px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; gap: 20px; }
   .hero-top p { max-width: 300px; color: rgba(236, 235, 228, 0.75); }
   .hero-top .r { text-align: right; }
-  .title { font-weight: 700; font-size: clamp(64px, 17.5vw, 300px); line-height: 0.82; letter-spacing: -0.065em; text-transform: uppercase; }
+  .title { font-weight: 700; font-size: clamp(64px, 17.5vw, 300px); max-width: 100%; line-height: 0.82; letter-spacing: -0.065em; text-transform: uppercase; }
   .title .r { text-align: right; }
+  @media (min-width: 761px) { .title { font-size: clamp(64px, 13.5vw, 250px); } .title .r { text-align: left; padding-left: 9vw; } }
   .title .serif { text-transform: none; font-weight: 400; letter-spacing: -0.02em; color: var(--heat); }
   .hero-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; margin-top: 36px; gap: 20px; border-top: 1px solid var(--line); padding-top: 18px; }
   .lead { font-size: clamp(18px, 1.6vw, 24px); line-height: 1.25; max-width: 460px; letter-spacing: -0.01em; }
