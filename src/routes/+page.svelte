@@ -1,12 +1,14 @@
 <script lang="ts">
   import { href } from '$lib/link';
   import { onMount } from 'svelte';
-  import { assets } from '$app/paths';
   import { projects, posts, fmtDate, site } from '$lib/content';
   import { gsap, ScrollTrigger, setupGsap, reduced, whenIntroDone, splitChars, reveal, lines } from '$lib/motion';
   import Molten from '$lib/components/Molten.svelte';
   import Marquee from '$lib/components/Marquee.svelte';
   import ProjectArt from '$lib/components/ProjectArt.svelte';
+
+  // Drop a photo at src/lib/assets/portrait.(jpg|png|webp) and it shows up in the hero. No file = no portrait.
+  const portrait = Object.values(import.meta.glob<string>('/src/lib/assets/portrait.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' }))[0];
 
   const featured = projects.filter((p) => p.featured);
   const latest = posts.slice(0, 3);
@@ -91,7 +93,7 @@
 
 <header class="hero">
   <Molten />
-  <div class="portrait" aria-hidden="true"><img src="{assets}/images/nabeel.jpg" alt="" onerror={(e) => ((e.currentTarget as HTMLElement).parentElement!.style.display = 'none')} /></div>
+  {#if portrait}<div class="portrait" aria-hidden="true"><img src={portrait} alt="" /></div>{/if}
   <div class="hero-top mono hero-fade">
     <p>Full-stack AI engineer ✦ LLM systems ✦ real-time backends</p>
     <p class="r">Bayreuth, DE<br />← Islamabad, PK</p>
