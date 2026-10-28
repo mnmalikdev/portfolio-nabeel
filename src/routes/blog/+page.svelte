@@ -23,12 +23,12 @@
   }
 </script>
 
-<Seo title="Writing — Nabeel Malik" description="Notes by Nabeel Malik on AI engineering, LLM agents, event-driven backends and real-time systems." path="/blog/" />
+<Seo title="Writing — Nabeel Malik" description="Writing by Nabeel Malik on AI engineering, LLM agents, backends, books and ideas." path="/blog/" />
 
 <header class="page-head">
   <h1 use:chars>Writ<span class="serif">ing</span></h1>
   <div class="sub" use:reveal={{ y: 30, delay: 0.5, children: true }}>
-    <p>Notes on event-driven backends, data modelling, infra, and whatever else I learn the hard way.</p>
+    <p>AI engineering, backends, books, ideas — and whatever else I learn the hard way.</p>
     {#if tags.length}
       <div class="filters">
         {#each ['All', ...tags] as t}

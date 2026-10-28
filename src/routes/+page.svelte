@@ -185,7 +185,7 @@
       <div class="eyebrow mono" style="margin:0">03 — Writing</div>
       <a href={href(`/blog/`)} class="mono">All posts →</a>
     </div>
-    <h2 class="w-title" use:lines><span class="ln"><span>Notes from the</span></span><span class="ln"><span><span class="serif">factory</span> floor</span></span></h2>
+    <h2 class="w-title" use:lines><span class="ln"><span>Thinking out</span></span><span class="ln"><span><span class="serif">loud</span></span></span></h2>
     <ul class="posts" use:reveal={{ children: true, y: 40 }}>
       {#each latest as post}
         <li>
