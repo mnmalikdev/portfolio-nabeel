@@ -1,5 +1,6 @@
 <script lang="ts">
   import { site } from '$lib/content';
+  import SocialIcon from '$lib/components/SocialIcon.svelte';
   import { PREVIEW } from '$lib/link';
   import { lines, magnetic, scrollTo } from '$lib/motion';
 
@@ -30,8 +31,8 @@
     </div>
     <footer class="mono">
       <div class="socials">
-        <a href={site.github} target="_blank" rel="noopener">GitHub</a>
-        <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a href={site.github} target="_blank" rel="noopener"><SocialIcon name="github" size={13} /> GitHub</a>
+        <a href={site.linkedin} target="_blank" rel="noopener"><SocialIcon name="linkedin" size={12} /> LinkedIn</a>
         {#if !PREVIEW}<a href="/rss.xml">RSS</a>{/if}
       </div>
       <span>© {new Date().getFullYear()} Nabeel Malik</span>
@@ -55,7 +56,7 @@
   .reach span { border-bottom-color: transparent; }
   footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid rgba(12, 12, 11, 0.25); padding-top: 18px; margin-top: 60px; }
   .socials { display: flex; gap: 26px; }
-  .socials a { position: relative; }
+  .socials a { position: relative; display: inline-flex; align-items: center; gap: 7px; }
   .socials a::after { content: ''; position: absolute; left: 0; bottom: -3px; width: 100%; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.5s var(--ease); }
   .socials a:hover::after { transform: scaleX(1); transform-origin: left; }
   footer button { font-family: inherit; font-size: inherit; letter-spacing: inherit; text-transform: inherit; }
