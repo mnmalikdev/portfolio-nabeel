@@ -98,14 +98,15 @@ export type Xp = { when: string; org: string; role: string; where: string; url?:
 export const experience: Xp[] = [
     { when: 'Jan 2026 — Now', current: true, org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer (full-time since Jul 2026; part-time Jan–Jul 2026)', steps: [{ title: 'Full-stack AI engineer', when: 'Jul 2026 — Now · Full-time' }, { title: 'Full-stack engineer', when: 'Jan — Jul 2026 · Part-time' }], where: 'Aachen, DE · Remote', groups: [
       { items: [
-        'Migrated the AI agent from a self-hosted Qwen stack (LlamaIndex, ReAct) to the Anthropic Claude API, removing the legacy engine and redundant endpoints.',
-        'Built a FastAPI backend and 12 native agent tools on Claude Sonnet 5.5 for Claire, an injection-molding AI assistant: operators log defects, write shift handovers and edit assets from chat, with human confirmation before every write.',
-        'Designed the agent harness to report only what it can verify — "detection not configured" instead of a false "no anomaly" — and kept user PII out of model context.',
-        'Built evals that test Claire\'s answers against real production questions, catching regressions before each release.',
-        'Built the shift-handover module end to end (shift plans with history, crew rostering, chat and voice entries, notifications, images), used across 3 plants and 40+ shifts per week.',
-        'Shipped 56 merged PRs in a full-stack TypeScript monorepo (NestJS, SvelteKit 5, PostgreSQL/Drizzle, Redis), owning features from schema to UI, backed by 250+ unit, integration and E2E tests.',
-        'Made real-time machine-data views up to 160x faster by moving them from a 1.4-billion-row table to roll-up tables; 30-day dashboards load in 16 ms instead of 1,150 ms.',
-        'Part-time phase: built the first AI assistant on self-hosted Qwen models (35B for chat, 1.5B for routing) with LlamaIndex ReAct agents and a Neo4j knowledge graph, voice handovers on self-hosted Whisper, and a real-time logbook over WebSockets.',
+        'Migrated the AI agent from a self-hosted Qwen stack to the Anthropic Claude API, removing the legacy engine.',
+        'Upgraded the main model for chat, reports and handover extraction from Claude Sonnet 4.6 to 5.5, cutting cost per request by about 13%; cheap tasks run on Haiku 4.5.',
+        'Built a FastAPI backend and 12 agent tools for Claire so operators can log defects, write handovers and edit assets from chat, with human confirmation on every write.',
+        'Designed the agent to report only what it can verify, e.g. "detection not configured" instead of a false "no anomaly", and kept user PII out of the model.',
+        'Built evals on real production questions to catch regressions before each release.',
+        'Built the shift-handover module end to end, from shift plans and rostering to chat and voice entries, used across 3 plants and 40+ shifts per week.',
+        'Shipped 56 merged PRs across NestJS, SvelteKit 5, PostgreSQL and Redis, with 250+ unit, integration and E2E tests.',
+        'Made real-time machine-data views up to 160x faster with roll-up tables over a 1.4-billion-row table, from 1,150 ms to 16 ms.',
+        'Part-time: built the first AI assistant on self-hosted Qwen models with LlamaIndex ReAct agents and a Neo4j knowledge graph, voice handovers on self-hosted Whisper, and a real-time logbook over WebSockets.'
       ] }
     ] },
     { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', url: 'https://mlarteka.com/', role: 'Software engineer (staff augmentation) · now Mlarteka', where: 'Canada · Remote', groups: [
