@@ -124,7 +124,7 @@
   {#if portrait}<div class="portrait" aria-hidden="true"><img src={portrait} alt="" /></div>{/if}
   <div class="hero-top mono hero-fade">
     <p>Full-stack AI engineer ✦ LLM systems ✦ real-time backends</p>
-    <div class="r"><p><svg class="pin" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Bayreuth, DE<br />← Islamabad, PK</p><p class="soc"><a href={site.github} target="_blank" rel="noopener"><SocialIcon name="github" size={13} /> GitHub</a> <a href={site.linkedin} target="_blank" rel="noopener"><SocialIcon name="linkedin" size={12} /> LinkedIn</a> <a href={site.cv} download>CV ↓</a></p></div>
+    <div class="r"><p><svg class="pin" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>Bayreuth, DE<br />← Islamabad, PK</p><p class="soc"><a href={site.github} target="_blank" rel="noopener"><SocialIcon name="github" size={13} /> GitHub</a> <a href={site.linkedin} target="_blank" rel="noopener"><SocialIcon name="linkedin" size={12} /> LinkedIn</a></p></div>
   </div>
   <h1 class="title" bind:this={title} aria-label="Nabeel Malik">
     <span class="ln"><span class="l1">Nabeel</span></span>
@@ -132,7 +132,13 @@
   </h1>
   <div class="hero-bottom hero-fade">
     <p class="lead">I build <span class="serif heat">AI-powered</span> products end to end — LLM pipelines and agents, event-driven backends, and the interfaces people actually use.</p>
-    <p class="mono muted">5+ yrs · Python · TypeScript · LLMs · Kafka · Postgres</p>
+    <div class="mid">
+      <p class="mono muted">5+ yrs · Python · TypeScript · LLMs · Kafka · Postgres</p>
+      <a class="cv-btn mono" href={site.cv} download data-cursor="CV">
+        <span>Download CV</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14"/></svg>
+      </a>
+    </div>
     <div class="scroll-cue mono"><span>Scroll</span><i></i></div>
   </div>
 </header>
@@ -280,6 +286,12 @@
   @media (min-width: 761px) { .title { font-size: clamp(64px, 13.5vw, 250px); } .title .r { text-align: left; padding-left: 9vw; } }
   .title .serif { text-transform: none; font-weight: 400; letter-spacing: -0.02em; color: var(--heat); }
   .hero-bottom { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end; margin-top: 36px; gap: 20px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .mid { display: grid; gap: 16px; justify-items: start; }
+  .cv-btn { display: inline-flex; align-items: center; gap: 12px; padding: 14px 22px; border-radius: 99px; background: var(--heat); color: var(--ink); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; position: relative; overflow: hidden; isolation: isolate; transition: color 0.4s; }
+  .cv-btn::after { content: ''; position: absolute; inset: 0; background: var(--paper); transform: translateY(101%); transition: transform 0.5s var(--ease); z-index: -1; }
+  .cv-btn:hover::after { transform: translateY(0); }
+  .cv-btn svg { transition: transform 0.5s var(--ease); }
+  .cv-btn:hover svg { transform: translateY(3px); }
   .lead { font-size: clamp(18px, 1.6vw, 24px); line-height: 1.25; max-width: 460px; letter-spacing: -0.01em; }
   .scroll-cue { justify-self: end; display: flex; align-items: center; gap: 10px; }
   .scroll-cue i { display: block; width: 1px; height: 46px; background: var(--line); position: relative; overflow: hidden; }
