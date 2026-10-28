@@ -97,16 +97,21 @@ export const site = {
 export type Xp = { when: string; org: string; role: string; where: string; url?: string; current?: boolean; steps?: { title: string; when: string }[]; groups?: { title?: string; url?: string; items: string[] }[] };
 export const experience: Xp[] = [
     { when: 'Jan 2026 — Now', current: true, org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer (full-time since Jul 2026; part-time Jan–Jul 2026)', steps: [{ title: 'Full-stack AI engineer', when: 'Jul 2026 — Now · Full-time' }, { title: 'Full-stack engineer', when: 'Jan — Jul 2026 · Part-time' }], where: 'Aachen, DE · Remote', groups: [
-      { items: [
+      { title: 'Full-time · Jul 2026 — Now', items: [
         'Moved the AI agent off a self-hosted Qwen setup onto the Anthropic Claude API and removed the old engine.',
         'Switched the main model from Claude Sonnet 4.6 to 5.5, which made each request about 13% cheaper. Small tasks stay on Haiku 4.5.',
         'Wrote the FastAPI backend and 12 tools for Claire. Operators can log defects, write handovers and edit assets from chat, and nothing is saved until they confirm it.',
         'Made the agent say when it cannot check something, such as "detection is not configured", instead of reporting "no anomaly". User PII never reaches the model.',
         'Set up evals with real questions from production to catch regressions before release.',
         'Owned the shift-handover module: shift plans, rostering, and handovers by chat or voice. It runs in 3 plants with 40+ shifts a week.',
-        'Merged 56 PRs in NestJS, SvelteKit 5, PostgreSQL and Redis, with 250+ unit, integration and E2E tests.',
-        'Cut dashboard load time on machine data from 1,150 ms to 16 ms by reading from roll-up tables instead of a 1.4-billion-row table.',
-        'Part-time: developed the first AI assistant on self-hosted Qwen models with LlamaIndex and a Neo4j knowledge graph, added voice handovers with Whisper, and rebuilt the logbook to update live over WebSockets.'
+        'Cut dashboard load time on machine data from 1,150 ms to 16 ms by reading from roll-up tables instead of a 1.4-billion-row table.'
+      ] },
+      { title: 'Part-time · Jan — Jul 2026', items: [
+        'Developed the first AI assistant on self-hosted Qwen models, a 35B model for chat and a 1.5B one for routing, with LlamaIndex agents and a Neo4j knowledge graph.',
+        'Added voice handovers with self-hosted Whisper, including matching spoken machine names to the right asset.',
+        'Rebuilt the production logbook so entries update live over WebSockets and can link 5+ entity types.',
+        'Moved all logbook entries to JSONB with Drizzle ORM without any downtime.',
+        'Added multi-cavity support to experiments. A 16-cavity mold now needs one setup, not 16.'
       ] }
     ] },
     { when: 'May 2024 — Oct 2025', org: 'mobileLIVE', url: 'https://mlarteka.com/', role: 'Software engineer (staff augmentation) · now Mlarteka', where: 'Canada · Remote', groups: [
