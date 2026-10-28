@@ -11,9 +11,9 @@
   // Drop a photo at src/lib/assets/portrait.(jpg|png|webp) and it shows up in the hero. No file = no portrait.
   const portrait = Object.values(import.meta.glob<string>('/src/lib/assets/portrait.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' }))[0];
 
-  type Xp = { when: string; org: string; role: string; where: string; groups?: { title?: string; items: string[] }[] };
+  type Xp = { when: string; org: string; role: string; where: string; url?: string; groups?: { title?: string; items: string[] }[] };
   const xps: Xp[] = [
-    { when: 'Jan 2026 — Now', org: 'OSPHIM', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
+    { when: 'Jan 2026 — Now', org: 'OSPHIM', url: 'https://www.osphim.com/de', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
       { items: [
         'Built Claire, an injection-molding AI agent (Python, FastAPI, SQLAlchemy, Claude) on an agent harness — tool-calling, tenant-scoped data access, honest about data gaps. Live for all customers.',
         'Voice shift-handover pipeline: speech-to-text plus LLM extraction turns spoken handovers into structured shift data.',
@@ -236,6 +236,7 @@
                 <ul>{#each g.items as it}<li>{it}</li>{/each}</ul>
               </div>
             {/each}
+            {#if x.url}<a class="xp-link mono" href={x.url} target="_blank" rel="noopener">{x.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*$/, '')} ↗</a>{/if}
           </div></div>
         {:else}
           <div class="xp static"><span class="mono">{x.when}</span><h4>{x.org}</h4><span class="role">{x.role}</span><span class="when mono">{x.where}<i class="plus ghost" aria-hidden="true"></i></span></div>
@@ -365,6 +366,7 @@
   .xp-inner { overflow: hidden; display: grid; grid-template-columns: 170px 1fr; column-gap: 20px; }
   .xp-group { grid-column: 2; padding-bottom: 26px; max-width: 900px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s, transform 0.6s var(--ease); }
   .open .xp-group { opacity: 1; transform: none; transition-delay: 0.15s; }
+  .xp-link { grid-column: 2; justify-self: start; margin: -6px 0 28px; color: var(--heat); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
   .g-title { color: var(--heat); margin-bottom: 12px; }
   .xp-group ul { list-style: none; display: grid; gap: 10px; }
   .xp-group li { position: relative; padding-left: 22px; color: rgba(236, 235, 228, 0.82); font-size: clamp(15px, 1.15vw, 18px); line-height: 1.45; }
@@ -377,7 +379,7 @@
   .xp h4 { font-size: clamp(28px, 3.6vw, 58px); letter-spacing: -0.045em; font-weight: 600; line-height: 1; }
   .role { color: var(--mute); }
   .when { text-align: right; }
-  @media (max-width: 760px) { .xp { grid-template-columns: 1fr; gap: 6px; } .when { text-align: left; } .xp-inner { grid-template-columns: 1fr; } .xp-group { grid-column: 1; } }
+  @media (max-width: 760px) { .xp { grid-template-columns: 1fr; gap: 6px; } .when { text-align: left; } .xp-inner { grid-template-columns: 1fr; } .xp-group, .xp-link { grid-column: 1; } }
 
   .stack-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 6vw; }
   .stack-wrap h2 { font-size: clamp(48px, 6vw, 104px); letter-spacing: -0.055em; line-height: 0.9; font-weight: 700; position: sticky; top: 110px; align-self: start; }

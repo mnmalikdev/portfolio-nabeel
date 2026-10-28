@@ -10,6 +10,8 @@ art: agents
 order: 0
 featured: true
 nda: true
+links:
+  live: https://www.osphim.com/news/hello-claire-ki-basierten-fertigungsassistenten
 ---
 
 ## The problem
