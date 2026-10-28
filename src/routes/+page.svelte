@@ -233,7 +233,7 @@
       {#each [
         ['AI & LLMs', ['Python', 'FastAPI', 'LLM extraction', 'RAG', 'Agents', 'Speech-to-text']],
         ['Backend & data', ['NestJS', 'Node.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'TypeORM', 'Kafka', 'Redis']],
-        ['Frontend', ['SvelteKit 5', 'React', 'React Native', 'Tailwind']],
+        ['Frontend', ['SvelteKit 5', 'React', 'Tailwind']],
         ['Infra & ops', ['Azure', 'Hetzner', 'AWS', 'Docker', 'Terraform', 'OpenTelemetry']]
       ] as [label, items]}
         <div class="group">
