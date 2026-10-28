@@ -11,7 +11,7 @@
   // Drop a photo at src/lib/assets/portrait.(jpg|png|webp) and it shows up in the hero. No file = no portrait.
   const portrait = Object.values(import.meta.glob<string>('/src/lib/assets/portrait.{jpg,jpeg,png,webp}', { eager: true, query: '?url', import: 'default' }))[0];
 
-  type Xp = { when: string; org: string; role: string; where: string; url?: string; groups?: { title?: string; items: string[] }[] };
+  type Xp = { when: string; org: string; role: string; where: string; url?: string; groups?: { title?: string; url?: string; items: string[] }[] };
   const xps: Xp[] = [
     { when: 'Jan 2026 — Now', org: 'OSPHIM', url: 'https://www.osphim.com/de/info', role: 'Full-stack AI engineer · part-time Jan–Jul 2026, full-time since', where: 'Aachen, DE · Remote', groups: [
       { items: [
@@ -35,7 +35,7 @@
       ] }
     ] },
     { when: 'Apr 2022 — May 2024', org: 'Code Huddle', role: 'Associate software engineer · intern Apr–Jun 2022', where: 'Islamabad, PK', groups: [
-      { title: 'GYMYG — virtual gym partner (US startup)', items: [
+      { title: 'GYMYG — virtual gym partner (US startup)', url: 'https://gymyg.fit/', items: [
         'NestJS REST APIs with JWT RBAC serving 10K DAU at under 200 ms P95.',
         'Stripe monthly subscriptions, $15k+ processed.',
         'Video load times down ~30% with FFmpeg compression and CloudFront edge delivery.',
@@ -232,7 +232,7 @@
           <div class="xp-body"><div class="xp-inner">
             {#each x.groups as g}
               <div class="xp-group">
-                {#if g.title}<p class="mono g-title">{g.title}</p>{/if}
+                {#if g.title}<p class="mono g-title">{#if g.url}<a href={g.url} target="_blank" rel="noopener">{g.title} ↗</a>{:else}{g.title}{/if}</p>{/if}
                 <ul>{#each g.items as it}<li>{it}</li>{/each}</ul>
               </div>
             {/each}
@@ -367,6 +367,7 @@
   .xp-group { grid-column: 2; padding-bottom: 26px; max-width: 900px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s, transform 0.6s var(--ease); }
   .open .xp-group { opacity: 1; transform: none; transition-delay: 0.15s; }
   .xp-link { grid-column: 2; justify-self: start; margin: -6px 0 28px; color: var(--heat); border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .g-title a { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
   .g-title { color: var(--heat); margin-bottom: 12px; }
   .xp-group ul { list-style: none; display: grid; gap: 10px; }
   .xp-group li { position: relative; padding-left: 22px; color: rgba(236, 235, 228, 0.82); font-size: clamp(15px, 1.15vw, 18px); line-height: 1.45; }
