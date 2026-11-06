@@ -28,6 +28,7 @@
 <div id="stage"><canvas id="c"></canvas></div>
 <div id="hud"><span id="state">loading…</span><div id="bar"><i></i></div></div>
 <div id="msg"></div>
+<canvas id="thumb" style="position:fixed;right:12px;top:44px;width:90px;border:2px solid #fff;border-radius:8px;display:none"></canvas>
 <div id="controls" style="display:none">
   <button id="plateBtn" class="ghost">📸 Re-capture room</button>
   <button id="toggleBtn">💨 Poof</button>
@@ -36,7 +37,7 @@
 <div id="overlay">
   <h1>🥷 Ninja Vanish</h1>
   <p>Make the ninja seal: <b>index + middle finger up, pressed together</b>, other fingers folded. Hold it for a moment and you vanish. Do it again to come back.</p>
-  <p>First it photographs your empty room, so you'll get a countdown to step out of frame (or tilt the phone away).</p>
+  <p>First it photographs your empty room. <b>Prop the phone against something</b>, then walk out of view during the 6-second countdown. Then come back and do the seal.</p>
   <button id="startBtn">Start camera</button>
   <p id="err" style="color:#ff7a7a"></p>
 </div>
@@ -99,10 +100,18 @@ function drawVideo(target, tctx) {
 
 async function capturePlate() {
   capturing = true; plateReady = false;
-  for (let n = 4; n > 0; n--) { msgEl.textContent = `Step out of frame… ${n}`; await new Promise(r => setTimeout(r, 1000)); }
+  for (let n = 6; n > 0; n--) {
+    msgEl.innerHTML = `Prop the phone up &amp; step out of view<br>${n}`;
+    await new Promise(r => setTimeout(r, 1000));
+  }
+  plateCanvas.width = v.videoWidth; plateCanvas.height = v.videoHeight;
   drawVideo(plateCanvas, pctx);
-  msgEl.textContent = 'Room captured ✓';
-  setTimeout(() => msgEl.textContent = '', 900);
+  const th = document.getElementById('thumb');
+  th.width = plateCanvas.width / 4; th.height = plateCanvas.height / 4;
+  th.getContext('2d').drawImage(plateCanvas, 0, 0, th.width, th.height);
+  th.style.display = 'block';
+  msgEl.innerHTML = 'Room captured ✓<br><small>Check the thumbnail: you should NOT be in it</small>';
+  setTimeout(() => msgEl.textContent = '', 2500);
   plateReady = true; capturing = false;
 }
 
@@ -119,8 +128,12 @@ function trigger() {
 function loop() {
   const now = performance.now();
   if (v.readyState >= 2) {
-    if (c.width !== v.videoWidth) {
-      c.width = plateCanvas.width = v.videoWidth; c.height = plateCanvas.height = v.videoHeight;
+    if (c.width !== v.videoWidth || c.height !== v.videoHeight) {
+      c.width = v.videoWidth; c.height = v.videoHeight;
+      if (plateReady && (plateCanvas.width !== c.width || plateCanvas.height !== c.height)) {
+        plateReady = false; state = 'VISIBLE';
+        msgEl.innerHTML = 'Camera changed — tap 📸 to re-capture the room';
+      }
     }
     // gesture detection always runs on the real feed
     if (landmarker && v.currentTime !== lastVideoTime) {
