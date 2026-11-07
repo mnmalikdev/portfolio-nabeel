@@ -313,7 +313,7 @@
   .hero > .portrait { position: absolute; z-index: 0; right: 0; bottom: 0; width: min(42vw, 760px); height: 100%; pointer-events: none; overflow: hidden;
     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%);
     -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%); mask-composite: intersect; }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; filter: grayscale(1) contrast(1.05); opacity: 1; will-change: transform; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; opacity: 1; will-change: transform; }
   @media (max-width: 760px) {
     /* mobile: photo on top in the flow, name overlaps the chest, everything else below — nothing on the face */
     .hero > .portrait { position: relative; inset: auto; order: 0; width: calc(100% + 2 * var(--pad)); height: auto; aspect-ratio: 1 / 1.1; margin: 0 calc(-1 * var(--pad));
