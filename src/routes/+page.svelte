@@ -99,7 +99,18 @@
         });
       });
       mm.add('(max-width: 860px)', () => {
-        track.querySelectorAll('.card').forEach((c) => gsap.from(c, { y: 80, autoAlpha: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 85%' } }));
+        // mobile: each project card opens like a widening frame, art zooms out as you scroll past it
+        track.querySelectorAll<HTMLElement>('.card').forEach((c) => {
+          const art = c.querySelector<HTMLElement>('.art');
+          const media = art?.lastElementChild;
+          const meta = c.querySelector('.meta');
+          if (art && !c.classList.contains('more')) {
+            gsap.fromTo(art, { clipPath: 'inset(14% 12% 14% 12% round 22px)' }, { clipPath: 'inset(0% 0% 0% 0% round 6px)', ease: 'none', scrollTrigger: { trigger: c, start: 'top 100%', end: 'top 30%', scrub: true } });
+            if (media) gsap.fromTo(media, { scale: 1.35 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: c, start: 'top bottom', end: 'bottom 40%', scrub: true } });
+          }
+          if (meta) gsap.fromTo(meta, { y: 50, autoAlpha: 0 }, { y: 0, autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: meta, start: 'top 98%', end: 'top 70%', scrub: true } });
+          else gsap.fromTo(c, { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: c, start: 'top 98%', end: 'top 65%', scrub: true } });
+        });
       });
 
       /* ---- cinematic beats ---- */
@@ -126,7 +137,16 @@
           .from('.quote cite', { autoAlpha: 0, y: 20, duration: 0.8 }, '>-0.2');
       });
       mm.add('(max-width: 860px)', () => {
-        gsap.from(qLines, { yPercent: 110, rotate: 3, duration: 1.2, stagger: 0.08, ease: 'expo.out', scrollTrigger: { trigger: '.quote', start: 'top 80%' } });
+        // mobile: no pin (address bar makes pins jumpy), but lines + scale still follow your finger
+        gsap.timeline({ scrollTrigger: { trigger: '.quote', start: 'top 85%', end: 'center 45%', scrub: 0.6 } })
+          .fromTo('.quote blockquote', { scale: 0.85 }, { scale: 1, ease: 'none', duration: 3 }, 0)
+          .from(qLines, { yPercent: 110, rotate: 4, stagger: 0.6, duration: 1, ease: 'power2.out' }, 0)
+          .from('.quote cite', { autoAlpha: 0, y: 20, duration: 0.8 }, '>-0.2');
+
+        // mobile: experience rows slide in one by one with the scroll
+        document.querySelectorAll<HTMLElement>('.xp-item > .xp').forEach((el) => {
+          gsap.fromTo(el, { xPercent: -12, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: el, start: 'top 100%', end: 'top 75%', scrub: true } });
+        });
       });
     });
 
