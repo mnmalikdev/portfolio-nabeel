@@ -73,10 +73,28 @@
       })(about);
       gsap.fromTo(words, { opacity: 0.12 }, { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: about, start: 'top 80%', end: 'bottom 45%', scrub: true } });
 
-      // hero parallax
-      gsap.to(title, { yPercent: -18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-      // portrait drifts slower than the title — depth
-      gsap.to('.portrait img', { yPercent: 10, scale: 1.08, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+      // HERO SCENE: pin the hero, name shatters into 3D and flies past the camera, photo pushes in, frame pulls back
+      const mobile = innerWidth <= 760;
+      const spread = () => innerWidth * (mobile ? 0.9 : 0.6);
+      const noIR = { immediateRender: false };
+      gsap.set(title, { perspective: 900 });
+      gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: mobile ? '+=90%' : '+=150%', pin: true, scrub: 1, anticipatePin: 1 } })
+        .set('.title .ln', { overflow: 'visible' }, 0)
+        .fromTo('.hero-fade', { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -40, duration: 0.3, stagger: 0.05, ...noIR }, 0)
+        .fromTo('.portrait img', { scale: 1, yPercent: 0 }, { scale: 1.4, yPercent: 6, duration: 1.2, ease: 'none', ...noIR }, 0)
+        .fromTo([...chars, ...chars2],
+          { x: 0, y: 0, z: 0, rotationX: 0, rotationY: 0, opacity: 1 },
+          {
+            x: () => gsap.utils.random(-spread(), spread()),
+            y: () => gsap.utils.random(-innerHeight * 0.6, innerHeight * 0.4),
+            z: () => gsap.utils.random(300, 800),
+            rotationX: () => gsap.utils.random(-120, 120),
+            rotationY: () => gsap.utils.random(-120, 120),
+            opacity: 0,
+            duration: 0.8, ease: 'power2.in', stagger: { each: 0.025, from: 'center' }, ...noIR
+          }, 0.12)
+        .fromTo('.hero', { scale: 1, borderRadius: 0 }, { scale: 0.9, borderRadius: 28, duration: 0.35, ease: 'none', ...noIR }, '>-0.15')
+        .fromTo('.portrait', { autoAlpha: 1 }, { autoAlpha: 0.15, duration: 0.35, ...noIR }, '<');
 
       // counters
       document.querySelectorAll<HTMLElement>('[data-count]').forEach((n) => {
@@ -114,12 +132,6 @@
       });
 
       /* ---- cinematic beats ---- */
-
-      // scene 1: hero pulls back like a camera dolly-out as you leave it
-      gsap.to('.hero', {
-        scale: 0.9, borderRadius: 28, autoAlpha: 0.35, ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-      });
 
       // scene 2: Work section opens like a curtain / widening frame before it pins
       gsap.fromTo(work,
