@@ -102,7 +102,32 @@
         track.querySelectorAll('.card').forEach((c) => gsap.from(c, { y: 80, autoAlpha: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 85%' } }));
       });
 
-      gsap.fromTo('.quote blockquote', { scale: 0.92 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.quote', start: 'top bottom', end: 'center center', scrub: true } });
+      /* ---- cinematic beats ---- */
+
+      // scene 1: hero pulls back like a camera dolly-out as you leave it
+      gsap.to('.hero', {
+        scale: 0.9, borderRadius: 28, autoAlpha: 0.35, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+
+      // scene 2: Work section opens like a curtain / widening frame before it pins
+      gsap.fromTo(work,
+        { clipPath: 'inset(16% 9% 16% 9% round 28px)' },
+        { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', scrollTrigger: { trigger: work, start: 'top bottom', end: 'top top', scrub: true } }
+      );
+      gsap.from('.work-intro h2', { scale: 0.82, yPercent: 20, ease: 'none', transformOrigin: '0% 50%', scrollTrigger: { trigger: work, start: 'top bottom', end: 'top top', scrub: true } });
+
+      // scene 3: closing quote — pinned finale, lines rise as you scroll, then the credit rolls in
+      const qLines = '.quote .ln > span';
+      mm.add('(min-width: 861px)', () => {
+        gsap.timeline({ scrollTrigger: { trigger: '.quote', start: 'center center', end: '+=110%', pin: true, scrub: 1 } })
+          .fromTo('.quote blockquote', { scale: 0.88 }, { scale: 1, ease: 'none', duration: 3 }, 0)
+          .from(qLines, { yPercent: 110, rotate: 3, stagger: 0.6, duration: 1, ease: 'power2.out' }, 0)
+          .from('.quote cite', { autoAlpha: 0, y: 20, duration: 0.8 }, '>-0.2');
+      });
+      mm.add('(max-width: 860px)', () => {
+        gsap.from(qLines, { yPercent: 110, rotate: 3, duration: 1.2, stagger: 0.08, ease: 'expo.out', scrollTrigger: { trigger: '.quote', start: 'top 80%' } });
+      });
     });
 
     whenIntroDone(() => {
@@ -254,7 +279,7 @@
 </section>
 
 <section class="quote" data-nav="about">
-  <blockquote use:lines>
+  <blockquote>
     <span class="ln"><span>Make it work,</span></span>
     <span class="ln"><span>make it <span class="serif">right,</span></span></span>
     <span class="ln"><span>make it fast.</span></span>
@@ -263,7 +288,7 @@
 </section>
 
 <style>
-  .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) 36px; overflow: hidden; }
+  .hero { position: relative; transform-origin: 50% 100%; will-change: transform; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) 36px; overflow: hidden; }
   .hero > :not(:global(canvas)) { position: relative; z-index: 1; }
   .hero > .portrait { position: absolute; z-index: 0; right: 0; bottom: 0; width: min(42vw, 760px); height: 100%; pointer-events: none; overflow: hidden;
     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%);
