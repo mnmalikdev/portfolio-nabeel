@@ -310,7 +310,7 @@
 <style>
   .hero { position: relative; transform-origin: 50% 100%; will-change: transform; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) 36px; overflow: hidden; }
   .hero > :not(:global(canvas)) { position: relative; z-index: 1; }
-  .hero > .portrait { position: absolute; z-index: 0; right: 0; bottom: 0; width: min(42vw, 760px); height: 100%; pointer-events: none; overflow: hidden;
+  .hero > .portrait { position: absolute; z-index: 0; right: 0; bottom: 0; width: min(42vw, 760px); height: calc(100% - 72px); pointer-events: none; overflow: hidden;
     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%);
     -webkit-mask-composite: source-in; mask-image: linear-gradient(to top, transparent 0%, #000 22%), linear-gradient(to right, transparent 0%, #000 32%); mask-composite: intersect; }
   .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; opacity: 1; will-change: transform; }
@@ -320,11 +320,11 @@
       -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 30%); mask-image: linear-gradient(to top, transparent 0%, #000 30%); }
     .portrait img { opacity: 0.95; }
   }
-  .hero-top { position: absolute !important; top: 110px; left: var(--pad); right: var(--pad); display: flex; justify-content: space-between; gap: 20px; }
+  .hero-top { position: absolute !important; top: 110px; left: var(--pad); right: var(--pad); display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
   .hero-top p { max-width: 300px; color: rgba(236, 235, 228, 0.75); }
-  .hero-top .r { text-align: right; }
+  .hero-top .r { text-align: left; }
   .pin { display: inline-block; vertical-align: -1px; margin-right: 6px; color: var(--heat); }
-  .hero-top .soc { margin-top: 10px; display: flex; gap: 16px; justify-content: flex-end; }
+  .hero-top .soc { margin-top: 10px; display: flex; gap: 16px; justify-content: flex-start; }
   .hero-top .soc a { display: inline-flex; align-items: center; gap: 7px; color: var(--paper); border-bottom: 1px solid rgba(236, 235, 228, 0.35); }
   .title { font-weight: 700; font-size: clamp(64px, 17.5vw, 300px); max-width: 100%; line-height: 0.82; letter-spacing: -0.065em; text-transform: uppercase; }
   .title .r { text-align: right; }
