@@ -298,6 +298,8 @@
   </div>
 </section>
 
+<!-- wrapper keeps the pinned .quote from being the page's last top-level node (GSAP pin-spacer + Svelte teardown) -->
+<div class="quote-wrap">
 <section class="quote" data-nav="about">
   <blockquote>
     <span class="ln"><span>Make it work,</span></span>
@@ -306,6 +308,7 @@
   </blockquote>
   <cite class="mono">— Kent Beck. Still the plan.</cite>
 </section>
+</div>
 
 <style>
   .hero { position: relative; transform-origin: 50% 100%; will-change: transform; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--pad) 36px; overflow: hidden; }
