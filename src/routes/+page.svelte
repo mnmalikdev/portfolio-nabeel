@@ -90,7 +90,7 @@
         const dist = () => track.scrollWidth - innerWidth;
         const h = gsap.to(track, {
           x: () => -dist(), ease: 'none',
-          scrollTrigger: { trigger: work, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, onUpdate: (s) => (progress.style.width = s.progress * 100 + '%') }
+          scrollTrigger: { trigger: work, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true, onUpdate: (s) => (progress.style.width = s.progress * 100 + '%') }
         });
         track.querySelectorAll<HTMLElement>('.card').forEach((c) => {
           // inner parallax only: the art is always visible, it just drifts as the card travels
@@ -365,7 +365,7 @@
 
   .work { padding: 0; height: 100vh; overflow: hidden; background: var(--paper); color: var(--ink); }
   .work-head { position: absolute; top: 74px; left: 0; right: 0; padding: 0 var(--pad); display: flex; justify-content: space-between; z-index: 2; }
-  .work-track { display: flex; height: 100%; align-items: center; gap: 4vw; padding: 0 var(--pad); width: max-content; will-change: transform; }
+  .work-track { display: flex; height: 100%; align-items: center; gap: 4vw; padding: 0 var(--pad); /* extra tail so the last card lands centred and is fully seen before the pin releases */ padding-right: calc(50vw - min(18vw, 240px)); width: max-content; will-change: transform; }
   .work-intro { width: min(54vw, 820px); flex: none; padding-right: 2vw; }
   .work-intro h2 { font-size: clamp(56px, 8.5vw, 150px); line-height: 0.85; letter-spacing: -0.06em; font-weight: 700; text-transform: uppercase; }
   .work-intro h2 .serif { text-transform: none; color: var(--heat); letter-spacing: -0.02em; }
@@ -387,7 +387,7 @@
   .work-progress i { display: block; height: 100%; width: 0; background: var(--heat); }
   @media (max-width: 860px) {
     .work { height: auto; padding: 130px 0 60px; }
-    .work-track { flex-direction: column; width: auto; height: auto; gap: 70px; align-items: stretch; }
+    .work-track { flex-direction: column; width: auto; height: auto; gap: 70px; align-items: stretch; padding-right: var(--pad); }
     .work-intro, .card, .card.more { width: 100%; }
     .card { height: auto; } .art { aspect-ratio: 4/3; } .card.more { padding: 60px 0; }
     .meta { grid-template-columns: 1fr; } .work-progress { display: none; }
