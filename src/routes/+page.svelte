@@ -3,7 +3,8 @@
   import { onMount } from 'svelte';
   import Seo from '$lib/components/Seo.svelte';
   import { projects, posts, fmtDate, site, experience as xps } from '$lib/content';
-  import { gsap, ScrollTrigger, setupGsap, reduced, whenIntroDone, splitChars, reveal, lines } from '$lib/motion';
+  import { gsap, ScrollTrigger, setupGsap, reduced, whenIntroDone, splitChars, reveal, lines, magnetic, scramble, scroll } from '$lib/motion';
+  import ZoomThrough from '$lib/components/ZoomThrough.svelte';
   import Molten from '$lib/components/Molten.svelte';
   import Marquee from '$lib/components/Marquee.svelte';
   import ProjectArt from '$lib/components/ProjectArt.svelte';
@@ -44,7 +45,7 @@
   const featured = projects.filter((p) => p.featured);
   const latest = posts.slice(0, 3);
 
-  let title: HTMLElement, track: HTMLElement, work: HTMLElement, about: HTMLElement, progress: HTMLElement;
+  let title: HTMLElement, track: HTMLElement, work: HTMLElement, about: HTMLElement, progress: HTMLElement, cite: HTMLElement;
 
   onMount(() => {
     if (reduced()) return;
@@ -73,6 +74,14 @@
       })(about);
       gsap.fromTo(words, { opacity: 0.12 }, { opacity: 1, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: about, start: 'top 80%', end: 'bottom 45%', scrub: true } });
 
+      // hero letters scatter upward as you leave — each one on its own trajectory
+      const heroChars = [...chars, ...chars2];
+      gsap.to(heroChars, {
+        y: () => gsap.utils.random(-260, -40), rotationX: () => gsap.utils.random(-70, 70), transformPerspective: 700, ease: 'none',
+        stagger: { each: 0.02, from: 'center' },
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.5 }
+      });
+
       // hero parallax
       gsap.to(title, { yPercent: -18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
       // portrait drifts slower than the title — depth
@@ -92,11 +101,30 @@
           x: () => -dist(), ease: 'none',
           scrollTrigger: { trigger: work, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true, onUpdate: (s) => (progress.style.width = s.progress * 100 + '%') }
         });
+        // cards lean into the scroll: skew follows smooth-scroll velocity, eases back when you stop
+        const cards = track.querySelectorAll<HTMLElement>('.card');
+        const skewTo = gsap.quickTo(cards, 'skewX', { duration: 0.6, ease: 'power3' });
+        const lean = () => { if (h.scrollTrigger?.isActive) skewTo(gsap.utils.clamp(-8, 8, -(scroll.lenis?.velocity ?? 0) * 0.35)); };
+        gsap.ticker.add(lean);
+        // 3D tilt toward the cursor on hover
+        const offs: (() => void)[] = [];
+        cards.forEach((c) => {
+          const art = c.querySelector<HTMLElement>('.art');
+          if (!art) return;
+          const move = (e: PointerEvent) => {
+            const r = art.getBoundingClientRect();
+            gsap.to(art, { rotateY: ((e.clientX - r.left) / r.width - 0.5) * 12, rotateX: -((e.clientY - r.top) / r.height - 0.5) * 9, transformPerspective: 1000, duration: 0.6, ease: 'power3.out' });
+          };
+          const leave = () => gsap.to(art, { rotateX: 0, rotateY: 0, duration: 1, ease: 'elastic.out(1, .5)' });
+          c.addEventListener('pointermove', move); c.addEventListener('pointerleave', leave);
+          offs.push(() => { c.removeEventListener('pointermove', move); c.removeEventListener('pointerleave', leave); });
+        });
         track.querySelectorAll<HTMLElement>('.card').forEach((c) => {
           // inner parallax only: the art is always visible, it just drifts as the card travels
           const media = c.querySelector('.art')?.lastElementChild;
           if (media) gsap.fromTo(media, { xPercent: 5, scale: 1.12 }, { xPercent: -5, scale: 1.12, ease: 'none', scrollTrigger: { trigger: c, containerAnimation: h, start: 'left right', end: 'right left', scrub: true } });
         });
+        return () => { gsap.ticker.remove(lean); offs.forEach((f) => f()); };
       });
       mm.add('(max-width: 860px)', () => {
         // mobile: each project card opens like a widening frame, art zooms out as you scroll past it
@@ -134,14 +162,16 @@
         gsap.timeline({ scrollTrigger: { trigger: '.quote', start: 'center center', end: '+=110%', pin: true, scrub: 1 } })
           .fromTo('.quote blockquote', { scale: 0.88 }, { scale: 1, ease: 'none', duration: 3 }, 0)
           .from(qLines, { yPercent: 110, rotate: 3, stagger: 0.6, duration: 1, ease: 'power2.out' }, 0)
-          .from('.quote cite', { autoAlpha: 0, y: 20, duration: 0.8 }, '>-0.2');
+          .from('.quote cite', { autoAlpha: 0, y: 20, duration: 0.8 }, '>-0.2')
+          .call(() => scramble(cite), [], '<');
       });
       mm.add('(max-width: 860px)', () => {
         // mobile: no pin (address bar makes pins jumpy), but lines + scale still follow your finger
         gsap.timeline({ scrollTrigger: { trigger: '.quote', start: 'top 85%', end: 'center 45%', scrub: 0.6 } })
           .fromTo('.quote blockquote', { scale: 0.85 }, { scale: 1, ease: 'none', duration: 3 }, 0)
           .from(qLines, { yPercent: 110, rotate: 4, stagger: 0.6, duration: 1, ease: 'power2.out' }, 0)
-          .from('.quote cite', { autoAlpha: 0, y: 20, duration: 0.8 }, '>-0.2');
+          .from('.quote cite', { autoAlpha: 0, y: 20, duration: 0.8 }, '>-0.2')
+          .call(() => scramble(cite), [], '<');
 
         // mobile: experience rows slide in one by one with the scroll
         document.querySelectorAll<HTMLElement>('.xp-item > .xp').forEach((el) => {
@@ -158,7 +188,29 @@
       ScrollTrigger.refresh();
     });
 
-    return () => ctx.revert();
+    // hero letters thin out near the cursor (Bricolage is a variable font, so weight is continuous)
+    let offWeight = () => {};
+    if (matchMedia('(hover: hover)').matches) {
+      const ws = [...chars, ...chars2].map((c) => ({ c, w: 700 }));
+      let mx = -1e4, my = -1e4;
+      const move = (e: PointerEvent) => { mx = e.clientX; my = e.clientY; };
+      const tick = () => {
+        if (scrollY > innerHeight) return;
+        for (const o of ws) {
+          const r = o.c.getBoundingClientRect();
+          const d = Math.hypot(r.left + r.width / 2 - mx, r.top + r.height / 2 - my);
+          const target = 700 - 500 * Math.max(0, 1 - d / 420) ** 1.5;
+          if (Math.abs(target - o.w) < 0.5) continue;
+          o.w += (target - o.w) * 0.14;
+          o.c.style.fontWeight = String(Math.round(o.w));
+        }
+      };
+      addEventListener('pointermove', move);
+      gsap.ticker.add(tick);
+      offWeight = () => { removeEventListener('pointermove', move); gsap.ticker.remove(tick); };
+    }
+
+    return () => { offWeight(); ctx.revert(); };
   });
 </script>
 
@@ -179,7 +231,7 @@
     <p class="lead">I build <span class="serif heat">AI-powered</span> products end to end — LLM pipelines and agents, event-driven backends, and the interfaces people actually use.</p>
     <div class="mid">
       <p class="mono muted">5+ yrs · Python · TypeScript · LLMs · Kafka · Postgres</p>
-      <a class="cv-btn mono" href={site.cv} download data-cursor="CV">
+      <a class="cv-btn mono" href={site.cv} download data-cursor="CV" use:magnetic={0.3}>
         <span>Download CV</span>
         <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14"/></svg>
       </a>
@@ -202,6 +254,8 @@
     <div class="stat"><div class="n">∞</div><p class="mono">Kafka messages, apparently</p></div>
   </div>
 </section>
+
+<ZoomThrough />
 
 <section class="work" data-nav="work" bind:this={work}>
   <div class="work-head mono"><span>02 — Selected work</span><a href={href(`/projects/`)} class="all">All projects →</a></div>
@@ -306,7 +360,7 @@
     <span class="ln"><span>make it <span class="serif">right,</span></span></span>
     <span class="ln"><span>make it fast.</span></span>
   </blockquote>
-  <cite class="mono">— Kent Beck. Still the plan.</cite>
+  <cite class="mono" bind:this={cite}>— Kent Beck. Still the plan.</cite>
 </section>
 </div>
 

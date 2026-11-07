@@ -116,3 +116,19 @@ export function magnetic(node: HTMLElement, strength = 0.35) {
   node.addEventListener('pointerleave', leave);
   return { destroy: () => { node.removeEventListener('pointermove', move); node.removeEventListener('pointerleave', leave); } };
 }
+
+/** Decode-style text scramble: random glyphs settle into the real text left to right. */
+export function scramble(el: HTMLElement, duration = 0.9) {
+  const text = el.dataset.text ?? (el.dataset.text = el.textContent ?? '');
+  const glyphs = '▓▒░<>/\\_—=+*#01';
+  const o = { p: 0 };
+  gsap.killTweensOf(o);
+  gsap.to(o, {
+    p: 1, duration, ease: 'none',
+    onUpdate: () => {
+      const n = Math.floor(o.p * text.length);
+      el.textContent = text.slice(0, n) + [...text.slice(n)].map((c) => (c === ' ' ? ' ' : glyphs[(Math.random() * glyphs.length) | 0])).join('');
+    },
+    onComplete: () => { el.textContent = text; }
+  });
+}
